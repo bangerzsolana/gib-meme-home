@@ -24,15 +24,22 @@
     }
 
     html, body {
+      height: 100vh;
+      overflow: hidden;
       font-family: 'Inter', sans-serif;
       color: #fff;
-      overflow-x: hidden;
       background: linear-gradient(160deg, #052535 0%, #091640 45%, #100728 100%);
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
     }
 
     /* ── HERO ────────────────────────────────────────── */
     .hero {
-      height: 100vh;
+      flex: 62;
+      min-height: 0;
       position: relative;
       overflow: hidden;
       display: flex;
@@ -44,7 +51,7 @@
     /* Frog as full-screen background */
     .frog-bg {
       position: absolute;
-      height: 135vh;
+      height: 130%;
       width: auto;
       top: 50%;
       left: 50%;
@@ -79,18 +86,18 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 36px;
+      gap: 20px;
       padding: 0 24px;
     }
 
     .hero-title {
       font-family: 'LuckiestGuy', sans-serif;
-      font-size: clamp(48px, 6.5vw, 96px);
-      line-height: 1.0;
+      font-size: clamp(26px, 3.2vw, 48px);
+      line-height: 1.1;
       color: #fff;
       text-shadow:
-        5px 5px 0 rgba(0,0,0,0.7),
-        0 0 80px rgba(95, 213, 247, 0.25);
+        3px 3px 0 rgba(0,0,0,0.7),
+        0 0 60px rgba(95, 213, 247, 0.25);
       letter-spacing: 2px;
     }
 
@@ -98,40 +105,45 @@
 
     .btn-play-hero {
       font-family: 'LuckiestGuy', sans-serif;
-      font-size: 26px;
+      font-size: 20px;
       letter-spacing: 1px;
       background: var(--play-green);
       color: #000;
       border: 2.5px solid var(--black);
       border-radius: 50px;
-      box-shadow: 6px 5px 0 var(--black);
-      padding: 18px 64px;
+      box-shadow: 5px 4px 0 var(--black);
+      padding: 14px 52px;
       cursor: pointer;
       transition: transform 0.08s, box-shadow 0.08s;
       text-decoration: none;
       display: inline-block;
     }
-    .btn-play-hero:hover  { transform: translate(-2px, -2px); box-shadow: 8px 7px 0 var(--black); }
-    .btn-play-hero:active { transform: translate(6px, 5px); box-shadow: none; }
+    .btn-play-hero:hover  { transform: translate(-2px, -2px); box-shadow: 7px 6px 0 var(--black); }
+    .btn-play-hero:active { transform: translate(5px, 4px); box-shadow: none; }
 
     /* ── STATS ───────────────────────────────────────── */
     .stats-section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 64px 48px 96px;
+      flex: 38;
+      min-height: 0;
+      display: flex;
+      align-items: center;
     }
 
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      gap: 16px;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
     }
 
     .stat-box {
       background: rgba(255,255,255,0.06);
       border: 2px solid rgba(255,255,255,0.1);
       border-radius: 22px;
-      padding: 36px 24px 32px;
+      padding: 20px 16px 18px;
       text-align: center;
       cursor: default;
       transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), box-shadow 0.25s, border-color 0.25s, background 0.25s;
@@ -158,16 +170,16 @@
     .stat-box:nth-child(4):hover { border-color: rgba(255,215,0,0.5);   box-shadow: 0 16px 48px rgba(255,215,0,0.14); }
 
     .stat-icon {
-      font-size: 32px;
-      margin-bottom: 12px;
+      font-size: 24px;
+      margin-bottom: 8px;
       display: block;
     }
 
     .stat-number {
       font-family: 'LuckiestGuy', sans-serif;
-      font-size: 52px;
+      font-size: 38px;
       line-height: 1;
-      margin-bottom: 10px;
+      margin-bottom: 6px;
       letter-spacing: 1px;
     }
     .stat-box:nth-child(1) .stat-number { color: var(--teal); }
@@ -192,7 +204,7 @@
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1 class="hero-title">
-        A Gib Meme Coin<br>
+        A Memecoin<br>
         <span class="accent">Trading Card</span><br>
         Game
       </h1>
@@ -227,9 +239,7 @@
   </section>
 
   <script>
-    // Animated counters — trigger when scrolled into view
-    const counters = document.querySelectorAll('.stat-number[data-target]');
-
+    // Stats are always visible — animate on page load
     const animateCounter = (el) => {
       const target = parseInt(el.dataset.target);
       const prefix = el.dataset.prefix || '';
@@ -245,16 +255,9 @@
       requestAnimationFrame(tick);
     };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateCounter(entry.target);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.3 });
-
-    counters.forEach(el => observer.observe(el));
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.stat-number[data-target]').forEach(el => animateCounter(el));
+    });
   </script>
 
 </body>
