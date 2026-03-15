@@ -118,12 +118,16 @@
     }
 
     /* ── HEADLINE ── */
-    /* filter: drop-shadow works on composited pixels — correctly renders outside
-       the gradient text shape without bleeding into the letter interiors */
+    /* Wrap in a padded container so filter:drop-shadow has room to render
+       without being clipped by .page's overflow:hidden */
+    .hero-title-wrap {
+      padding: 28px 32px 4px;
+    }
+
     .hero-title {
       font-family: 'LuckiestGuy', sans-serif;
       font-size: clamp(28px, 3.8vw, 58px);
-      line-height: 1.0;
+      line-height: 1.05;
       letter-spacing: 3px;
       background: linear-gradient(135deg, #c084fc 0%, #a855f7 28%, #7c3aed 55%, #38bdf8 80%, #5FD5F7 100%);
       -webkit-background-clip: text;
@@ -135,13 +139,10 @@
         drop-shadow(0 0 18px rgba(168, 85, 247, 0.65))
         drop-shadow(0 0 36px rgba(95, 213, 247, 0.3))
         drop-shadow(0 5px 14px rgba(0,0,0,0.95));
-      white-space: nowrap;
-    }
-
-    /* Shine on headline — separate ::after, same content via data-text */
-    .hero-title {
+      /* Allow wrapping — prevents horizontal overflow clipping */
+      white-space: normal;
       position: relative;
-      display: inline-block;
+      display: block;
     }
 
     .hero-title::after {
@@ -150,7 +151,6 @@
       left: 0; top: 0;
       font: inherit;
       letter-spacing: inherit;
-      white-space: nowrap;
       background: linear-gradient(
         105deg,
         transparent 0%,
@@ -168,6 +168,7 @@
       animation: text-shine 3.2s linear infinite;
       pointer-events: none;
       filter: none;
+      width: 100%;
     }
 
     @keyframes text-shine {
@@ -240,40 +241,70 @@
 
     .hero-subline .hl { color: rgba(95, 213, 247, 0.65); }
 
-    /* ── STATS STRIP ── */
-    .stats-strip {
+    /* ── STAT CARDS (2 big ones) ── */
+    .stats-duo {
       display: flex;
+      align-items: stretch;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 4px;
+    }
+
+    .stat-card {
+      display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      flex-wrap: nowrap;
-      gap: 0;
-      margin-top: 2px;
+      gap: 4px;
+      padding: 18px 40px 16px;
+      border-radius: 20px;
+      border: 1.5px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), box-shadow 0.25s, border-color 0.25s;
+      min-width: 180px;
     }
 
-    .stat-item {
-      font-size: 12.5px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.5);
-      white-space: nowrap;
-      letter-spacing: 0.2px;
+    /* Top accent bar */
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: 20px 20px 0 0;
     }
 
-    .stat-item .val {
+    .stat-card.cards::before  { background: #5FD5F7; }
+    .stat-card.prize::before  { background: #FFD700; }
+
+    .stat-card.cards:hover { transform: translateY(-6px); border-color: rgba(95,213,247,0.5); box-shadow: 0 16px 40px rgba(95,213,247,0.18), 0 0 0 1px rgba(95,213,247,0.15); }
+    .stat-card.prize:hover { transform: translateY(-6px); border-color: rgba(255,215,0,0.5);  box-shadow: 0 16px 40px rgba(255,215,0,0.18),  0 0 0 1px rgba(255,215,0,0.15); }
+
+    .stat-card-icon {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .stat-card-number {
       font-family: 'LuckiestGuy', sans-serif;
-      font-size: 15px;
-      letter-spacing: 0.5px;
-      color: #fff;
+      font-size: 52px;
+      line-height: 1;
+      letter-spacing: 2px;
     }
 
-    /* Glowing dot separator */
-    .stat-sep {
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: rgba(95, 213, 247, 0.5);
-      box-shadow: 0 0 6px 1px rgba(95, 213, 247, 0.55);
-      margin: 0 18px;
-      flex-shrink: 0;
+    .stat-card.cards .stat-card-number { color: #5FD5F7; }
+    .stat-card.prize .stat-card-number  { color: #FFD700; }
+
+    .stat-card-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: rgba(255,255,255,0.45);
     }
   </style>
 </head>
@@ -291,32 +322,29 @@
 
     <div class="hero-content">
 
-      <h1 class="hero-title"
-          data-text="The Memecoin Trading Card Game">
-        The Memecoin Trading Card Game
-      </h1>
+      <div class="hero-title-wrap">
+        <h1 class="hero-title"
+            data-text="The Memecoin Trading Card Game">
+          The Memecoin Trading Card Game
+        </h1>
+      </div>
 
-      <a href="#" class="btn-play-hero">Play Now</a>
+      <a href="https://gib.meme/" class="btn-play-hero">Play Now</a>
 
       <p class="hero-subline">
-        <span class="hl">Free to Play</span> &nbsp;•&nbsp; Win Real Rewards
+        Compete for Real Prizes &nbsp;•&nbsp; <span class="hl">Win Real Rewards</span>
       </p>
 
-      <div class="stats-strip">
-        <div class="stat-item">
-          <span class="val" data-target="60" data-suffix="K">60K</span> Cards in Play
+      <div class="stats-duo">
+        <div class="stat-card cards">
+          <span class="stat-card-icon">🃏</span>
+          <div class="stat-card-number" data-target="60" data-suffix="K">60K</div>
+          <div class="stat-card-label">Cards in Play</div>
         </div>
-        <div class="stat-sep"></div>
-        <div class="stat-item">
-          <span class="val" data-target="22" data-suffix="K">22K</span> Secondary Sales
-        </div>
-        <div class="stat-sep"></div>
-        <div class="stat-item">
-          <span class="val" data-target="33" data-prefix="$" data-suffix="K">$33K</span> Rewards Distributed
-        </div>
-        <div class="stat-sep"></div>
-        <div class="stat-item">
-          <span class="val" data-target="100" data-prefix="$" data-suffix="K">$100K</span> Prize Pool
+        <div class="stat-card prize">
+          <span class="stat-card-icon">🏆</span>
+          <div class="stat-card-number" data-target="100" data-prefix="$" data-suffix="K">$100K</div>
+          <div class="stat-card-label">Prize Pool</div>
         </div>
       </div>
 
@@ -371,7 +399,7 @@
 
     // ── Count-up ──
     document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('[data-target]').forEach(el => {
+      document.querySelectorAll('.stat-card-number[data-target]').forEach(el => {
         const target = parseInt(el.dataset.target);
         const prefix = el.dataset.prefix || '';
         const suffix = el.dataset.suffix || '';
