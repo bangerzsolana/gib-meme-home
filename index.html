@@ -80,6 +80,14 @@
       align-items: center;
       justify-content: center;
     }
+    /* LuckiestGuy has ~0.2em of dead space above the cap height in its em box.
+       Flex centers the em box, not the visual glyph — so text appears to float high.
+       Nudge the text down to optically center it inside the pill/box. */
+    .title-the-text,
+    .title-game-text {
+      position: relative;
+      top: 0.12em;
+    }
 
     /* ── MEMECOIN / TRADING CARD ── */
     .title-main {
@@ -224,14 +232,14 @@
 
     <div class="hero-content">
 
-      <div class="title-the">the</div>
+      <div class="title-the"><span class="title-the-text">the</span></div>
 
       <div class="title-main">
         MEMECOIN<br>TRADING CARD
       </div>
 
       <div class="title-game-wrap">
-        <div class="title-game">GAME</div>
+        <div class="title-game"><span class="title-game-text">GAME</span></div>
       </div>
 
       <div class="stats-row">
