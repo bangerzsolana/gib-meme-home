@@ -104,6 +104,10 @@
       top: 4px; left: 4px; right: 4px;
       font-family: 'LuckiestGuy', sans-serif;
       font-size: min(13.5vw, 8vh);
+      /* KEEP line-height ≥ 1.1 — DO NOT lower this.
+         LuckiestGuy glyphs taller than the em box. background-clip:text
+         only paints the gradient inside the line box, so anything below
+         ~1.0 makes the tops of the glyphs invisible (appears clipped). */
       line-height: 1.15;
       letter-spacing: 1px;
       text-align: center;
@@ -121,6 +125,11 @@
       z-index: 1;
       font-family: 'LuckiestGuy', sans-serif;
       font-size: min(13.5vw, 8vh);
+      /* KEEP line-height ≥ 1.1 — DO NOT lower this.
+         With -webkit-text-fill-color:transparent + background-clip:text,
+         the gradient only renders inside the line box. LuckiestGuy glyphs
+         extend above the box at low line-heights — top of MEMECOIN goes
+         invisible. Took ~20 commits to diagnose. Don't touch this. */
       line-height: 1.15;
       letter-spacing: 1px;
       text-align: center;
