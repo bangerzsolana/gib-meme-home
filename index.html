@@ -90,13 +90,33 @@
     }
 
     /* ── MEMECOIN / TRADING CARD ── */
+    .title-main-wrap {
+      position: relative;
+      overflow: hidden;
+      padding: 8px 4px 4px;
+    }
+    .title-main-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -75%;
+      width: 50%; height: 100%;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
+      transform: skewX(-20deg);
+      animation: title-shine 3.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes title-shine {
+      0%   { left: -75%; opacity: 1; }
+      50%  { left: 125%; opacity: 1; }
+      51%  { opacity: 0; }
+      100% { left: 125%; opacity: 0; }
+    }
     .title-main {
       font-family: 'LuckiestGuy', sans-serif;
       font-size: 13.5vw;
       line-height: 0.95;
       letter-spacing: 1px;
       text-align: center;
-      padding-top: 8px;
       background: linear-gradient(160deg, #00F5FF 0%, #b29bf4 55%, #FE8CFA 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -108,7 +128,7 @@
     .title-game-wrap {
       display: flex;
       justify-content: center;
-      margin-top: 2px;
+      margin-top: 6px;
       margin-bottom: 4px;
     }
 
@@ -117,12 +137,12 @@
       align-items: center;
       justify-content: center;
       background: #9b72f5;
-      padding: 6px 32px;
+      padding: 5px 24px;
       border-radius: 6px;
       font-family: 'LuckiestGuy', sans-serif;
-      font-size: 12vw;
+      font-size: 8.5vw;
       line-height: 1;
-      letter-spacing: 3px;
+      letter-spacing: 2px;
       color: #fff;
       text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
       animation: wiggle 5s ease-in-out infinite;
@@ -159,8 +179,27 @@
     .stat:first-child .stat-num { color: #fff; }
     .stat:last-child  .stat-num { color: #fff; }
 
+    .stat-symbol {
+      font-size: 0.5em;
+      color: rgba(255,255,255,0.45);
+      display: inline-block;
+      transform: rotate(-10deg);
+      position: relative;
+      top: -0.15em;
+      margin-right: 1px;
+    }
+    .stat-symbol-suffix {
+      font-size: 0.5em;
+      color: rgba(255,255,255,0.45);
+      display: inline-block;
+      transform: rotate(10deg);
+      position: relative;
+      top: -0.15em;
+      margin-left: 1px;
+    }
+
     .stat-label {
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 700;
       color: rgba(255,255,255,0.45);
       text-transform: uppercase;
@@ -234,8 +273,10 @@
 
       <div class="title-the"><span class="title-the-text">the</span></div>
 
-      <div class="title-main">
-        MEMECOIN<br>TRADING CARD
+      <div class="title-main-wrap">
+        <div class="title-main">
+          MEMECOIN<br>TRADING CARD
+        </div>
       </div>
 
       <div class="title-game-wrap">
@@ -244,12 +285,12 @@
 
       <div class="stats-row">
         <div class="stat">
-          <div class="stat-num" data-target="100" data-prefix="$" data-suffix="K">$100K</div>
+          <div class="stat-num" data-target="100" data-prefix="$" data-suffix="K"><span class="stat-symbol">$</span>100K</div>
           <div class="stat-label">Prize Pool</div>
         </div>
         <div class="stats-dot"></div>
         <div class="stat">
-          <div class="stat-num" data-target="60" data-suffix="K+">60K+</div>
+          <div class="stat-num" data-target="60" data-suffix="K+">60K<span class="stat-symbol-suffix">+</span></div>
           <div class="stat-label">Cards</div>
         </div>
       </div>
@@ -267,9 +308,14 @@
         const suffix = el.dataset.suffix || '';
         const duration = 1600;
         const start = performance.now();
+        const prefixHtml = prefix ? '<span class="stat-symbol">' + prefix + '</span>' : '';
+        const suffixClass = suffix.includes('+') ? 'stat-symbol-suffix' : '';
+        const suffixMain = suffix.replace('+', '');
+        const suffixExtra = suffix.includes('+') ? '<span class="stat-symbol-suffix">+</span>' : '';
         const tick = now => {
           const p = Math.min((now - start) / duration, 1);
-          el.textContent = prefix + Math.round((1 - Math.pow(1 - p, 3)) * target) + suffix;
+          const val = Math.round((1 - Math.pow(1 - p, 3)) * target);
+          el.innerHTML = prefixHtml + val + suffixMain + suffixExtra;
           if (p < 1) requestAnimationFrame(tick);
         };
         requestAnimationFrame(tick);
