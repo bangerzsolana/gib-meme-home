@@ -28,27 +28,18 @@
       overflow: hidden;
       font-family: 'Inter', sans-serif;
       color: #fff;
+    }
+
+    /* ── ONE FULL-SCREEN CANVAS ── */
+    .page {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
       background: linear-gradient(160deg, #052535 0%, #091640 45%, #100728 100%);
     }
 
-    body {
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* ── HERO ────────────────────────────────────────── */
-    .hero {
-      flex: 62;
-      min-height: 0;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Frog as full-screen background */
+    /* Frog / video background */
     .frog-bg {
       position: absolute;
       height: 130%;
@@ -67,38 +58,51 @@
       50%       { transform: translate(-50%, -52%) rotate(0.5deg); }
     }
 
-    /* Subtle vignette so text reads over the frog */
-    .hero-overlay {
+    /* Bottom gradient fade — stats sit on top of this */
+    .bottom-fade {
       position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse at 50% 100%, rgba(5, 18, 45, 0.85) 0%, transparent 55%),
-        radial-gradient(ellipse at 50% 0%,   rgba(5, 18, 45, 0.5)  0%, transparent 50%);
+      bottom: 0; left: 0; right: 0;
+      height: 52%;
+      background: linear-gradient(to top, rgba(6, 14, 40, 0.92) 0%, rgba(6, 14, 40, 0.6) 40%, transparent 100%);
       z-index: 1;
       pointer-events: none;
     }
 
-    /* Text + button overlay */
+    /* Top vignette for text readability */
+    .top-fade {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 30%;
+      background: linear-gradient(to bottom, rgba(5, 18, 45, 0.45) 0%, transparent 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* ── HERO TEXT — centered, lower half ── */
     .hero-content {
-      position: relative;
+      position: absolute;
       z-index: 2;
+      left: 50%;
+      bottom: 32%;
+      transform: translateX(-50%);
+      width: 60%;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 20px;
-      padding: 0 24px;
+      gap: 22px;
     }
 
     .hero-title {
       font-family: 'LuckiestGuy', sans-serif;
-      font-size: clamp(26px, 3.2vw, 48px);
-      line-height: 1.1;
+      font-size: clamp(32px, 4.2vw, 64px);
+      line-height: 1.05;
       color: #fff;
       text-shadow:
-        3px 3px 0 rgba(0,0,0,0.7),
-        0 0 60px rgba(95, 213, 247, 0.25);
+        4px 4px 0 rgba(0,0,0,0.75),
+        0 0 60px rgba(95, 213, 247, 0.2);
       letter-spacing: 2px;
+      white-space: nowrap;
     }
 
     .hero-title .accent { color: #5FD5F7; }
@@ -121,41 +125,38 @@
     .btn-play-hero:hover  { transform: translate(-2px, -2px); box-shadow: 7px 6px 0 var(--black); }
     .btn-play-hero:active { transform: translate(5px, 4px); box-shadow: none; }
 
-    /* ── STATS ───────────────────────────────────────── */
-    .stats-section {
-      flex: 38;
-      min-height: 0;
-      display: flex;
-      align-items: center;
-    }
-
+    /* ── STATS — pinned to bottom, overlaying the gradient ── */
     .stats-grid {
+      position: absolute;
+      z-index: 2;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 1200px;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 16px;
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 48px;
     }
 
     .stat-box {
-      background: rgba(255,255,255,0.06);
-      border: 2px solid rgba(255,255,255,0.1);
+      border: 1.5px solid rgba(255,255,255,0.12);
       border-radius: 22px;
-      padding: 20px 16px 18px;
+      padding: 18px 16px 16px;
       text-align: center;
       cursor: default;
-      transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), box-shadow 0.25s, border-color 0.25s, background 0.25s;
+      transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), box-shadow 0.25s, border-color 0.25s;
       position: relative;
       overflow: hidden;
+      /* No background fill — lets the gradient show through */
+      background: transparent;
     }
 
     .stat-box::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 4px;
+      height: 3px;
       border-radius: 22px 22px 0 0;
     }
     .stat-box:nth-child(1)::before { background: var(--teal); }
@@ -163,23 +164,17 @@
     .stat-box:nth-child(3)::before { background: var(--lime); }
     .stat-box:nth-child(4)::before { background: var(--gold); }
 
-    .stat-box:hover { transform: translateY(-8px); background: rgba(255,255,255,0.1); }
-    .stat-box:nth-child(1):hover { border-color: rgba(95,213,247,0.5);  box-shadow: 0 16px 48px rgba(95,213,247,0.14); }
-    .stat-box:nth-child(2):hover { border-color: rgba(178,155,244,0.5); box-shadow: 0 16px 48px rgba(178,155,244,0.14); }
-    .stat-box:nth-child(3):hover { border-color: rgba(193,242,131,0.5); box-shadow: 0 16px 48px rgba(193,242,131,0.14); }
-    .stat-box:nth-child(4):hover { border-color: rgba(255,215,0,0.5);   box-shadow: 0 16px 48px rgba(255,215,0,0.14); }
-
-    .stat-icon {
-      font-size: 24px;
-      margin-bottom: 8px;
-      display: block;
-    }
+    .stat-box:hover { transform: translateY(-6px); }
+    .stat-box:nth-child(1):hover { border-color: rgba(95,213,247,0.5);  box-shadow: 0 12px 40px rgba(95,213,247,0.15); }
+    .stat-box:nth-child(2):hover { border-color: rgba(178,155,244,0.5); box-shadow: 0 12px 40px rgba(178,155,244,0.15); }
+    .stat-box:nth-child(3):hover { border-color: rgba(193,242,131,0.5); box-shadow: 0 12px 40px rgba(193,242,131,0.15); }
+    .stat-box:nth-child(4):hover { border-color: rgba(255,215,0,0.5);   box-shadow: 0 12px 40px rgba(255,215,0,0.15); }
 
     .stat-number {
       font-family: 'LuckiestGuy', sans-serif;
-      font-size: 38px;
+      font-size: 36px;
       line-height: 1;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
       letter-spacing: 1px;
     }
     .stat-box:nth-child(1) .stat-number { color: var(--teal); }
@@ -188,7 +183,7 @@
     .stat-box:nth-child(4) .stat-number { color: var(--gold); }
 
     .stat-label {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
       color: rgba(255,255,255,0.5);
       text-transform: uppercase;
@@ -198,65 +193,61 @@
 </head>
 <body>
 
-  <!-- HERO: frog fills the screen, text centered on top -->
-  <section class="hero">
+  <div class="page">
+
+    <!-- Background: frog (swap src for video later) -->
     <img class="frog-bg" src="./assets/gm-frogie.png" alt="" aria-hidden="true" />
-    <div class="hero-overlay"></div>
+
+    <!-- Gradient overlays -->
+    <div class="top-fade"></div>
+    <div class="bottom-fade"></div>
+
+    <!-- Hero text + CTA -->
     <div class="hero-content">
       <h1 class="hero-title">
-        A Memecoin<br>
-        <span class="accent">Trading Card</span><br>
-        Game
+        A <span class="accent">Memecoin</span> Trading Card Game
       </h1>
       <a href="#" class="btn-play-hero">Play Now</a>
     </div>
-  </section>
 
-  <!-- STATS -->
-  <section class="stats-section">
+    <!-- Stats floating over the bottom gradient -->
     <div class="stats-grid">
       <div class="stat-box">
-        <span class="stat-icon">🃏</span>
         <div class="stat-number" data-target="60" data-suffix="K">60K</div>
         <div class="stat-label">Cards in Play</div>
       </div>
       <div class="stat-box">
-        <span class="stat-icon">🔄</span>
         <div class="stat-number" data-target="22" data-suffix="K">22K</div>
         <div class="stat-label">Secondary Sales</div>
       </div>
       <div class="stat-box">
-        <span class="stat-icon">💰</span>
         <div class="stat-number" data-target="33" data-prefix="$" data-suffix="K">$33K</div>
         <div class="stat-label">Rewards Distributed</div>
       </div>
       <div class="stat-box">
-        <span class="stat-icon">🏆</span>
         <div class="stat-number" data-target="100" data-prefix="$" data-suffix="K">$100K</div>
         <div class="stat-label">Prize Pool</div>
       </div>
     </div>
-  </section>
+
+  </div>
 
   <script>
-    // Stats are always visible — animate on page load
-    const animateCounter = (el) => {
-      const target = parseInt(el.dataset.target);
-      const prefix = el.dataset.prefix || '';
-      const suffix = el.dataset.suffix || '';
-      const duration = 1400;
-      const start = performance.now();
-      const tick = (now) => {
-        const progress = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        el.textContent = prefix + Math.round(eased * target) + suffix;
-        if (progress < 1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    };
-
     document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('.stat-number[data-target]').forEach(el => animateCounter(el));
+      document.querySelectorAll('.stat-number[data-target]').forEach(el => {
+        const target = parseInt(el.dataset.target);
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
+        const duration = 1400;
+        const start = performance.now();
+        const tick = (now) => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = prefix + Math.round(eased * target) + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
     });
   </script>
 
