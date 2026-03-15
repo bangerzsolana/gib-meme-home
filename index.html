@@ -53,15 +53,19 @@
       pointer-events: none;
     }
 
-    /* ── CONTENT — pinned to bottom ── */
+    /* ── CONTENT — full-height flex, content pushed to bottom ── */
+    /* Using top:0/bottom:0 + justify-content:flex-end so the flex container
+       is always exactly 100vh. Content stacks upward from the bottom and can
+       never escape the top boundary — permanently prevents MEMECOIN clipping. */
     .hero-content {
       position: absolute;
-      bottom: 0;
+      top: 0; bottom: 0;
       left: 0; right: 0;
       z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: flex-end;
       padding: 0 16px 16px;
       gap: 4px;
     }
@@ -92,11 +96,11 @@
     /* ── MEMECOIN / TRADING CARD ── */
     .title-main-wrap {
       position: relative;
-      padding: 24px 4px 2px;
+      padding: 4px 4px 2px;
     }
     .title-main-shadow {
       position: absolute;
-      top: 24px; left: 4px; right: 4px;
+      top: 4px; left: 4px; right: 4px;
       font-family: 'LuckiestGuy', sans-serif;
       font-size: 13.5vw;
       line-height: 0.95;
