@@ -70,12 +70,15 @@
     .title-the {
       background: rgba(95, 213, 247, 0.5);
       border-radius: 50px;
-      padding: 5px 22px 4px;
+      padding: 3px 22px 2px;
       font-family: 'LuckiestGuy', sans-serif;
       font-size: 5.5vw;
       letter-spacing: 1px;
       color: #fff;
-      line-height: 1.4;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     /* ── MEMECOIN / TRADING CARD ── */
@@ -84,9 +87,12 @@
       font-size: 13.5vw;
       line-height: 0.95;
       letter-spacing: 1px;
-      color: #5FD5F7;
       text-align: center;
-      text-shadow: 3px 3px 0 rgba(0,0,0,0.45);
+      background: linear-gradient(160deg, #5FD5F7 0%, #b29bf4 60%, #FE8CFA 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(3px 3px 0 rgba(0,0,0,0.45));
     }
 
     /* ── "GAME" on rotated purple rectangle ── */
@@ -98,7 +104,9 @@
     }
 
     .title-game {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       background: #9b72f5;
       padding: 4px 32px 6px;
       border-radius: 6px;
@@ -138,8 +146,8 @@
       letter-spacing: -1px;
     }
 
-    .stat:first-child .stat-num { color: #b29bf4; }
-    .stat:last-child  .stat-num { color: #5FD5F7; }
+    .stat:first-child .stat-num { color: #fff; }
+    .stat:last-child  .stat-num { color: #fff; }
 
     .stat-label {
       font-size: 10px;
