@@ -121,9 +121,31 @@
       transition: transform 0.08s, box-shadow 0.08s;
       text-decoration: none;
       display: inline-block;
+      position: relative;
+      overflow: hidden;
     }
     .btn-play-hero:hover  { transform: translate(-2px, -2px); box-shadow: 7px 6px 0 var(--black); }
     .btn-play-hero:active { transform: translate(5px, 4px); box-shadow: none; }
+
+    .btn-play-hero::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.55) 50%, transparent 100%);
+      transform: skewX(-20deg);
+      animation: shine 2.8s ease-in-out infinite;
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    @keyframes shine {
+      0%   { left: -75%; opacity: 1; }
+      50%  { left: 125%; opacity: 1; }
+      51%  { opacity: 0; }
+      100% { left: 125%; opacity: 0; }
+    }
 
     /* ── STATS — pinned to bottom, overlaying the gradient ── */
     .stats-grid {
