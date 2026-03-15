@@ -101,40 +101,51 @@
       white-space: nowrap;
     }
 
-    /* Rounded outside stroke via multi-point text-shadow (always renders outside the fill) */
+    /* paint-order: stroke fill — stroke draws first, opaque fill covers the inner half,
+       leaving only the outside portion of the stroke visible. */
 
-    /* "A" and "Game" — light blue fill, white rounded stroke */
+    /* "A" and "Game" — light blue fill, white outside stroke */
     .title-plain {
       color: #a8e8ff;
-      text-shadow:
-        0px -5px 0 #fff,  1.9px -4.6px 0 #fff,  3.5px -3.5px 0 #fff,  4.6px -1.9px 0 #fff,
-        5px  0px 0 #fff,  4.6px  1.9px 0 #fff,  3.5px  3.5px 0 #fff,  1.9px  4.6px 0 #fff,
-        0px  5px 0 #fff, -1.9px  4.6px 0 #fff, -3.5px  3.5px 0 #fff, -4.6px  1.9px 0 #fff,
-       -5px  0px 0 #fff, -4.6px -1.9px 0 #fff, -3.5px -3.5px 0 #fff, -1.9px -4.6px 0 #fff;
+      -webkit-text-stroke: 10px #fff;
+      paint-order: stroke fill;
     }
 
-    /* "Memecoin Trading Card" — bright purple fill with shine, deep dark purple stroke */
+    /* "Memecoin Trading Card" — bright purple fill, dark purple outside stroke,
+       shine overlay via ::after pseudo-element (renders on top of the solid fill) */
     .title-accent {
+      color: #c084fc;
+      -webkit-text-stroke: 10px #3b1d8a;
+      paint-order: stroke fill;
+      display: inline-block;
+      position: relative;
+    }
+
+    /* Shine sweeps across as a white gradient overlay clipped to the text shape */
+    .title-accent::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0; top: 0;
+      font: inherit;
+      letter-spacing: inherit;
+      white-space: nowrap;
+      -webkit-text-stroke: 0;
       background: linear-gradient(
         100deg,
-        #c084fc 0%,
-        #c084fc 35%,
-        #ede9fe 47%,
-        #fff    50%,
-        #ede9fe 53%,
-        #c084fc 65%,
-        #c084fc 100%
+        transparent 0%,
+        transparent 38%,
+        rgba(255,255,255,0.0) 44%,
+        rgba(255,255,255,0.75) 50%,
+        rgba(255,255,255,0.0) 56%,
+        transparent 62%,
+        transparent 100%
       );
       background-size: 250% 100%;
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow:
-        0px -5px 0 #3b1d8a,  1.9px -4.6px 0 #3b1d8a,  3.5px -3.5px 0 #3b1d8a,  4.6px -1.9px 0 #3b1d8a,
-        5px  0px 0 #3b1d8a,  4.6px  1.9px 0 #3b1d8a,  3.5px  3.5px 0 #3b1d8a,  1.9px  4.6px 0 #3b1d8a,
-        0px  5px 0 #3b1d8a, -1.9px  4.6px 0 #3b1d8a, -3.5px  3.5px 0 #3b1d8a, -4.6px  1.9px 0 #3b1d8a,
-       -5px  0px 0 #3b1d8a, -4.6px -1.9px 0 #3b1d8a, -3.5px -3.5px 0 #3b1d8a, -1.9px -4.6px 0 #3b1d8a;
       animation: text-shine 2.6s linear infinite;
+      pointer-events: none;
     }
 
     @keyframes text-shine {
@@ -262,7 +273,7 @@
     <!-- Hero text + CTA -->
     <div class="hero-content">
       <h1 class="hero-title">
-        <span class="title-plain">A</span> <span class="title-accent">Memecoin Trading Card</span> <span class="title-plain">Game</span>
+        <span class="title-plain">A</span> <span class="title-accent" data-text="Memecoin Trading Card">Memecoin Trading Card</span> <span class="title-plain">Game</span>
       </h1>
       <a href="#" class="btn-play-hero">Play Now</a>
     </div>
