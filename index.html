@@ -83,7 +83,7 @@
       position: absolute;
       z-index: 2;
       left: 50%;
-      bottom: 32%;
+      bottom: 18%;
       transform: translateX(-50%);
       width: 60%;
       text-align: center;
@@ -95,7 +95,7 @@
 
     .hero-title {
       font-family: 'LuckiestGuy', sans-serif;
-      font-size: clamp(32px, 4.2vw, 64px);
+      font-size: clamp(24px, 3.2vw, 50px);
       line-height: 1.05;
       letter-spacing: 2px;
       white-space: nowrap;
@@ -104,10 +104,10 @@
     /* paint-order: stroke fill — stroke draws first, opaque fill covers the inner half,
        leaving only the outside portion of the stroke visible. */
 
-    /* "A" and "Game" — light blue fill, white outside stroke */
+    /* "A" and "Game" — light blue fill, dark blue outside stroke */
     .title-plain {
       color: #a8e8ff;
-      -webkit-text-stroke: 10px #fff;
+      -webkit-text-stroke: 10px #0d3270;
       paint-order: stroke fill;
     }
 
