@@ -101,33 +101,39 @@
       white-space: nowrap;
     }
 
-    /* Rounded stroke: paint stroke first, fill on top */
-    .hero-title span {
-      -webkit-text-stroke: 6px #101010;
-      paint-order: stroke fill;
-    }
+    /* Rounded outside stroke via multi-point text-shadow (always renders outside the fill) */
 
-    /* "A" and "Game" — white */
+    /* "A" and "Game" — light blue fill, white rounded stroke */
     .title-plain {
-      color: #fff;
+      color: #a8e8ff;
+      text-shadow:
+        0px -5px 0 #fff,  1.9px -4.6px 0 #fff,  3.5px -3.5px 0 #fff,  4.6px -1.9px 0 #fff,
+        5px  0px 0 #fff,  4.6px  1.9px 0 #fff,  3.5px  3.5px 0 #fff,  1.9px  4.6px 0 #fff,
+        0px  5px 0 #fff, -1.9px  4.6px 0 #fff, -3.5px  3.5px 0 #fff, -4.6px  1.9px 0 #fff,
+       -5px  0px 0 #fff, -4.6px -1.9px 0 #fff, -3.5px -3.5px 0 #fff, -1.9px -4.6px 0 #fff;
     }
 
-    /* "Memecoin Trading Card" — teal with sweeping shine */
+    /* "Memecoin Trading Card" — purple fill with shine, light purple rounded stroke */
     .title-accent {
       background: linear-gradient(
         100deg,
-        #5FD5F7 0%,
-        #5FD5F7 35%,
-        #c8f5ff 47%,
+        #b29bf4 0%,
+        #b29bf4 35%,
+        #e0d8ff 47%,
         #fff    50%,
-        #c8f5ff 53%,
-        #5FD5F7 65%,
-        #5FD5F7 100%
+        #e0d8ff 53%,
+        #b29bf4 65%,
+        #b29bf4 100%
       );
       background-size: 250% 100%;
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
+      text-shadow:
+        0px -5px 0 #d4c8ff,  1.9px -4.6px 0 #d4c8ff,  3.5px -3.5px 0 #d4c8ff,  4.6px -1.9px 0 #d4c8ff,
+        5px  0px 0 #d4c8ff,  4.6px  1.9px 0 #d4c8ff,  3.5px  3.5px 0 #d4c8ff,  1.9px  4.6px 0 #d4c8ff,
+        0px  5px 0 #d4c8ff, -1.9px  4.6px 0 #d4c8ff, -3.5px  3.5px 0 #d4c8ff, -4.6px  1.9px 0 #d4c8ff,
+       -5px  0px 0 #d4c8ff, -4.6px -1.9px 0 #d4c8ff, -3.5px -3.5px 0 #d4c8ff, -1.9px -4.6px 0 #d4c8ff;
       animation: text-shine 2.6s linear infinite;
     }
 
