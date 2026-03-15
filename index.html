@@ -97,15 +97,44 @@
       font-family: 'LuckiestGuy', sans-serif;
       font-size: clamp(32px, 4.2vw, 64px);
       line-height: 1.05;
-      color: #fff;
-      text-shadow:
-        4px 4px 0 rgba(0,0,0,0.75),
-        0 0 60px rgba(95, 213, 247, 0.2);
       letter-spacing: 2px;
       white-space: nowrap;
     }
 
-    .hero-title .accent { color: #5FD5F7; }
+    /* Rounded stroke: paint stroke first, fill on top */
+    .hero-title span {
+      -webkit-text-stroke: 6px #101010;
+      paint-order: stroke fill;
+    }
+
+    /* "A" and "Game" — white */
+    .title-plain {
+      color: #fff;
+    }
+
+    /* "Memecoin Trading Card" — teal with sweeping shine */
+    .title-accent {
+      background: linear-gradient(
+        100deg,
+        #5FD5F7 0%,
+        #5FD5F7 35%,
+        #c8f5ff 47%,
+        #fff    50%,
+        #c8f5ff 53%,
+        #5FD5F7 65%,
+        #5FD5F7 100%
+      );
+      background-size: 250% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: text-shine 2.6s linear infinite;
+    }
+
+    @keyframes text-shine {
+      from { background-position: 100% center; }
+      to   { background-position: -100% center; }
+    }
 
     .btn-play-hero {
       font-family: 'LuckiestGuy', sans-serif;
@@ -227,7 +256,7 @@
     <!-- Hero text + CTA -->
     <div class="hero-content">
       <h1 class="hero-title">
-        A <span class="accent">Memecoin</span> Trading Card Game
+        <span class="title-plain">A</span> <span class="title-accent">Memecoin Trading Card</span> <span class="title-plain">Game</span>
       </h1>
       <a href="#" class="btn-play-hero">Play Now</a>
     </div>
