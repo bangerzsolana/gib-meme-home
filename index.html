@@ -385,18 +385,19 @@
       flex-shrink: 0;
     }
 
-    @keyframes sword-spin-cw  { from { transform: rotate(0deg);   } to { transform: rotate(360deg);  } }
-    @keyframes sword-spin-ccw { from { transform: rotate(0deg);   } to { transform: rotate(-360deg); } }
+    /* Swords rock ±45deg — opposite phases so they mirror each other */
+    @keyframes sword-rock-cw  { 0%, 100% { transform: rotate(-45deg); } 50% { transform: rotate(45deg);  } }
+    @keyframes sword-rock-ccw { 0%, 100% { transform: rotate(45deg);  } 50% { transform: rotate(-45deg); } }
 
     .sword-left {
       translate: 0 0;
-      animation: sword-spin-cw 7s linear infinite;
+      animation: sword-rock-cw 7s ease-in-out infinite;
       transition: translate 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s;
     }
 
     .sword-right {
       translate: 0 0;
-      animation: sword-spin-ccw 7s linear infinite;
+      animation: sword-rock-ccw 7s ease-in-out infinite;
       transition: translate 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.35s;
     }
 
@@ -528,8 +529,8 @@
       font-size: min(9vw, 6vh);
       /* KEEP line-height ≥ 1.1 — same background-clip:text clipping risk */
       line-height: 1.15;
-      color: #b29bf4;
-      text-shadow: 2px 3px 0 rgba(0,0,0,0.35);
+      color: #b29bf4; /* awaiting Figma agent color confirmation */
+      text-shadow: 0px 4px 14px rgba(0,0,0,0.6);
       letter-spacing: 1px;
     }
 
