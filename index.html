@@ -376,35 +376,24 @@
 
     .sword-left {
       justify-self: end;
-      rotate: 40deg;
-      scale: -1 1;
       translate: 0 0;
-      transition:
-        translate 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s,
-        rotate    0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s;
+      transition: translate 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s;
     }
 
     .sword-right {
       justify-self: start;
-      rotate: 40deg;
-      scale: -1 1; /* mirror so blade points upper-left */
       translate: 0 0;
-      filter: hue-rotate(130deg); /* green → purple */
-      transition:
-        translate 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.35s,
-        rotate    0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.35s;
+      transition: translate 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.35s;
     }
 
     /* Off-screen starting positions — reset instantly when frame-2 is inactive */
     .frame-2:not(.active) .sword-left {
       translate: -120vw 0;
-      rotate: 0deg;
-      transition: translate 0s, rotate 0s;
+      transition: translate 0s;
     }
     .frame-2:not(.active) .sword-right {
       translate: 120vw 0;
-      rotate: 0deg;
-      transition: translate 0s, rotate 0s;
+      transition: translate 0s;
     }
   </style>
 </head>
@@ -432,9 +421,9 @@
         <div class="frame frame-2">
           <div class="title-build">BUILD DECKS</div>
           <div class="title-battle-scene">
-            <img class="sword sword-left" src="./assets/sword-green.png" alt="" aria-hidden="true">
+            <img class="sword sword-left" src="./assets/sword-left.png" alt="" aria-hidden="true">
             <div class="title-battle-box"><span class="title-battle-text">TO BATTLE</span></div>
-            <img class="sword sword-right" src="./assets/sword-green.png" alt="" aria-hidden="true">
+            <img class="sword sword-right" src="./assets/sword-right.png" alt="" aria-hidden="true">
           </div>
         </div>
 
