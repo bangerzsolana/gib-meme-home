@@ -317,6 +317,14 @@
       position: absolute;
       bottom: 0;
       left: 0; right: 0;
+      opacity: 0;
+      transform: scale(0.95);
+      pointer-events: none;
+    }
+    .frame-abs.active {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
     }
 
     /* ── FRAME 2: BUILD DECKS ── */
@@ -344,15 +352,17 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: #9ddb27;
+      background: #c1f283;
       padding: 7px 22px;
-      border-radius: 10px;
+      border-radius: 6px;
       font-family: 'LuckiestGuy', sans-serif;
       font-size: min(8.5vw, 5.5vh);
       line-height: 1;
       letter-spacing: 2px;
-      color: #0a1400;
+      color: #000000;
       white-space: nowrap;
+      transform: rotate(1.3deg);
+      box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
     }
 
     .title-battle-text {
@@ -393,16 +403,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(160deg, #00F5FF 0%, #b29bf4 55%, #FE8CFA 100%);
-      border-radius: 50px;
+      background: #977efb;
+      border-radius: 6px;
       padding: 5px 22px;
       font-family: 'LuckiestGuy', sans-serif;
       font-size: min(5vw, 3.5vh);
       line-height: 1;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
       color: #fff;
       width: 100%;
       box-sizing: border-box;
+      transform: rotate(1.3deg);
+      box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
     }
 
     .title-card-follows-text {
