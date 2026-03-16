@@ -478,6 +478,89 @@
       transition: translate 0s;
     }
 
+    /* ── FRAME 4: WIN REAL REWARDS ── */
+
+    .win-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      gap: 6px;
+      overflow: visible;
+    }
+
+    /* Large outer coins, smaller inner coins */
+    .coin-1, .coin-4 { width: min(17vw, 11vh); }
+    .coin-2, .coin-3 { width: min(11vw,  7vh); }
+
+    .sol-coin { display: block; flex-shrink: 0; }
+
+    /* Explosion + WIN wrapper — both jump together */
+    .win-explosion-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      animation: win-jump 1.6s ease-in-out infinite;
+    }
+
+    @keyframes win-jump {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-12px); }
+    }
+
+    .explosion-img {
+      width: min(28vw, 18vh);
+      display: block;
+      /* Rotates back and forth behind WIN */
+      animation: explosion-rock 2.2s ease-in-out infinite;
+    }
+
+    @keyframes explosion-rock {
+      0%, 100% { transform: rotate(-14deg); }
+      50%       { transform: rotate(14deg); }
+    }
+
+    .win-text {
+      position: absolute;
+      font-family: 'LuckiestGuy', sans-serif;
+      font-size: min(9vw, 6vh);
+      /* KEEP line-height ≥ 1.1 — same background-clip:text clipping risk */
+      line-height: 1.15;
+      color: #b29bf4;
+      text-shadow: 2px 3px 0 rgba(0,0,0,0.35);
+      letter-spacing: 1px;
+    }
+
+    /* REAL REWARDS — same gradient + animated shine as MEMECOIN title */
+    .title-real-rewards {
+      font-family: 'LuckiestGuy', sans-serif;
+      font-size: min(13.5vw, 9vh);
+      /* KEEP line-height ≥ 1.1 — background-clip:text clipping rule */
+      line-height: 1.15;
+      letter-spacing: 1px;
+      text-align: center;
+      white-space: nowrap;
+      background:
+        linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%) -200% 0 / 50% 100% no-repeat,
+        linear-gradient(160deg, #00F5FF 0%, #b29bf4 55%, #FE8CFA 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: title-shine 3.5s ease-in-out infinite;
+    }
+
+    /* Coin bob — staggered phases so they move like floating coins */
+    @keyframes coin-bob {
+      0%, 100% { transform: translateY(0);    }
+      50%       { transform: translateY(-7px); }
+    }
+    .coin-1 { animation: coin-bob 2.2s ease-in-out infinite 0s;    }
+    .coin-2 { animation: coin-bob 2.2s ease-in-out infinite 0.55s; }
+    .coin-3 { animation: coin-bob 2.2s ease-in-out infinite 1.1s;  }
+    .coin-4 { animation: coin-bob 2.2s ease-in-out infinite 1.65s; }
+
     /* Counter-phase bob: pink goes down as green goes up, then swap */
     @keyframes arrow-bob-down {
       0%, 100% { transform: translateY(0); }
@@ -521,6 +604,21 @@
           </div>
         </div>
 
+        <!-- Frame 4: WIN REAL REWARDS -->
+        <div class="frame frame-4 frame-abs">
+          <div class="win-row">
+            <img class="sol-coin coin-1" src="./assets/solcoin1.png" alt="" aria-hidden="true">
+            <img class="sol-coin coin-2" src="./assets/solcoin2.png" alt="" aria-hidden="true">
+            <div class="win-explosion-wrap">
+              <img class="explosion-img" src="./assets/explosion.png" alt="" aria-hidden="true">
+              <span class="win-text">WIN</span>
+            </div>
+            <img class="sol-coin coin-3" src="./assets/solcoin3.png" alt="" aria-hidden="true">
+            <img class="sol-coin coin-4" src="./assets/solcoin4.png" alt="" aria-hidden="true">
+          </div>
+          <div class="title-real-rewards">REAL REWARDS</div>
+        </div>
+
         <!-- Frame 3: CARD POWER FOLLOWS THE MARKET -->
         <div class="frame frame-3 frame-abs">
           <div class="title-card-follows"><span class="title-card-follows-text">CARD POWER FOLLOWS</span></div>
@@ -557,6 +655,7 @@
         { el: document.querySelector('.frame-1'), base: true },
         { el: document.querySelector('.frame-2'), base: false },
         { el: document.querySelector('.frame-3'), base: false },
+        { el: document.querySelector('.frame-4'), base: false },
       ];
       let current = 0;
       setInterval(() => {
