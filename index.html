@@ -103,7 +103,7 @@
       position: absolute;
       top: 4px; left: 4px; right: 4px;
       font-family: 'LuckiestGuy', sans-serif;
-      font-size: min(13.5vw, 8vh);
+      font-size: min(10.5vw, 7vh);
       /* KEEP line-height ≥ 1.1 — DO NOT lower this.
          LuckiestGuy glyphs taller than the em box. background-clip:text
          only paints the gradient inside the line box, so anything below
@@ -124,12 +124,12 @@
       position: relative;
       z-index: 1;
       font-family: 'LuckiestGuy', sans-serif;
-      font-size: min(13.5vw, 8vh);
       /* KEEP line-height ≥ 1.1 — DO NOT lower this.
          With -webkit-text-fill-color:transparent + background-clip:text,
          the gradient only renders inside the line box. LuckiestGuy glyphs
          extend above the box at low line-heights — top of MEMECOIN goes
          invisible. Took ~20 commits to diagnose. Don't touch this. */
+      font-size: min(10.5vw, 7vh);
       line-height: 1.15;
       letter-spacing: 1px;
       text-align: center;
@@ -164,7 +164,7 @@
       padding: 5px 24px;
       border-radius: 6px;
       font-family: 'LuckiestGuy', sans-serif;
-      font-size: min(8.5vw, 5.5vh);
+      font-size: min(5vw, 3.5vh);
       line-height: 1;
       letter-spacing: 2px;
       color: #fff;
@@ -195,7 +195,7 @@
     .stat-num {
       font-family: 'Inter', sans-serif;
       font-weight: 800;
-      font-size: min(7vw, 4.5vh);
+      font-size: min(4.5vw, 3vh);
       line-height: 1;
       letter-spacing: -1px;
     }
@@ -360,6 +360,7 @@
       line-height: 1;
       letter-spacing: 2px;
       color: #0a1400;
+      white-space: nowrap;
     }
 
     .title-battle-text {
@@ -418,7 +419,6 @@
 
         <!-- Frame 1: MEMECOIN TRADING CARD GAME -->
         <div class="frame frame-1">
-          <div class="title-the"><span class="title-the-text">the</span></div>
           <div class="title-main-wrap">
             <div class="title-main-shadow" aria-hidden="true">MEMECOIN<br>TRADING CARD</div>
             <div class="title-main">MEMECOIN<br>TRADING CARD</div>
