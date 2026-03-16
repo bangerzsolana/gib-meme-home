@@ -24,8 +24,8 @@
       position: relative;
       width: 100%;
       height: 100vh;
-      /* No overflow:hidden — frog/fade are self-contained and overflow:hidden
-         was causing MEMECOIN to be clipped whenever the content stack ran tall */
+      overflow-x: hidden; /* prevents sword/arrow entrance from creating scrollbar */
+      /* No overflow-y:hidden — that was causing MEMECOIN to be clipped */
     }
 
     /* ── FROG / VIDEO BACKGROUND ── */
@@ -340,12 +340,13 @@
 
     /* ── BATTLE SCENE ── */
     .title-battle-scene {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
+      position: relative;
       width: 100%;
-      gap: 8px;
-      overflow: visible;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* Swords are absolutely positioned so they don't inflate row height */
+      padding: min(5vw, 3.5vh) 0 0;
     }
 
     .title-battle-box {
@@ -363,6 +364,9 @@
       white-space: nowrap;
       transform: rotate(1.3deg);
       box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+      animation: wiggle 5s ease-in-out infinite;
+      position: relative;
+      z-index: 1;
     }
 
     .title-battle-text {
@@ -370,49 +374,50 @@
       top: 0.12em; /* same LuckiestGuy optical centering fix */
     }
 
-    /* ── SWORDS ── */
+    /* ── SWORDS — absolutely positioned so they don't push layout ── */
     .sword {
-      width: min(22vw, 14vh);
+      width: min(24vw, 16vh);
       display: block;
+      position: absolute;
+      top: 50%;
     }
 
+    /* Final positions — symmetric around center */
     .sword-left {
-      justify-self: end;
-      translate: 0 0;
+      right: calc(50% + 16px);
+      translate: 0 -50%;
       transition: translate 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s;
     }
 
     .sword-right {
-      justify-self: start;
-      translate: 0 0;
+      left: calc(50% + 16px);
+      translate: 0 -50%;
       transition: translate 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.35s;
     }
 
-    /* Off-screen starting positions — reset instantly when frame-2 is inactive */
+    /* Off-screen start — maintain Y centering, slide in horizontally */
     .frame-2:not(.active) .sword-left {
-      translate: -120vw 0;
+      translate: -120vw -50%;
       transition: translate 0s;
     }
     .frame-2:not(.active) .sword-right {
-      translate: 120vw 0;
+      translate: 120vw -50%;
       transition: translate 0s;
     }
 
     /* ── FRAME 3: CARD POWER FOLLOWS THE MARKET ── */
     .title-card-follows {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       background: #977efb;
       border-radius: 6px;
-      padding: 5px 22px;
+      padding: 6px 24px;
       font-family: 'LuckiestGuy', sans-serif;
-      font-size: min(5vw, 3.5vh);
+      font-size: min(6.5vw, 4.5vh);
       line-height: 1;
       letter-spacing: 2px;
       color: #fff;
-      width: 100%;
-      box-sizing: border-box;
       transform: rotate(1.3deg);
       box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
     }
@@ -468,6 +473,18 @@
       translate: 120vw 0;
       transition: translate 0s;
     }
+
+    /* Counter-phase bob: pink goes down as green goes up, then swap */
+    @keyframes arrow-bob-down {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(8px); }
+    }
+    @keyframes arrow-bob-up {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+    .arrow-down { animation: arrow-bob-down 2.4s ease-in-out infinite; }
+    .arrow-up   { animation: arrow-bob-up   2.4s ease-in-out infinite; }
   </style>
 </head>
 <body>
