@@ -570,6 +570,12 @@
     }
     .arrow-down { animation: arrow-bob-down 2.4s ease-in-out infinite; }
     .arrow-up   { animation: arrow-bob-up   2.4s ease-in-out infinite; }
+
+    /* ── DESKTOP OVERRIDES ── */
+    @media (min-width: 768px) {
+      .stat-num { font-size: min(2.5vw, 4.5vh); }
+      .btn-play { width: 50%; margin-left: auto; margin-right: auto; margin-top: 20px; }
+    }
   </style>
 </head>
 <body>
