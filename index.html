@@ -338,8 +338,9 @@
       color: #ffffff;
     }
 
-    /* Tighten frame-2 gap so BUILD DECKS and TO BATTLE sit close */
-    .frame-2 { gap: 2px; }
+    /* Tighten frame-2 — zero gap, then pull battle scene up with negative margin */
+    .frame-2 { gap: 0; }
+    .frame-2 .title-battle-scene { margin-top: -10px; }
 
     /* ── BATTLE SCENE ── */
     .title-battle-scene {
@@ -379,18 +380,23 @@
 
     /* ── SWORDS — flex items, naturally flanking the box ── */
     .sword {
-      width: min(20vw, 13vh);
+      width: min(22vw, 14.5vh);
       display: block;
       flex-shrink: 0;
     }
 
+    @keyframes sword-spin-cw  { from { transform: rotate(0deg);   } to { transform: rotate(360deg);  } }
+    @keyframes sword-spin-ccw { from { transform: rotate(0deg);   } to { transform: rotate(-360deg); } }
+
     .sword-left {
       translate: 0 0;
+      animation: sword-spin-cw 7s linear infinite;
       transition: translate 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s;
     }
 
     .sword-right {
       translate: 0 0;
+      animation: sword-spin-ccw 7s linear infinite;
       transition: translate 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.35s;
     }
 
