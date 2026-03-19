@@ -1,0 +1,10 @@
+[build]
+  builder = "nixpacks"
+  buildCommand = "npm run build"
+
+[deploy]
+  startCommand = "node server.js"
+  restartPolicyType = "ON_FAILURE"
+
+[healthcheck]
+  path = "/healthz"
