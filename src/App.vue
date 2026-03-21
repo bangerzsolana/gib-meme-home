@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <video class="frog-bg" src="/assets/seeker-splash.mp4" autoplay loop muted playsinline aria-hidden="true"></video>
+    <video ref="videoRef" class="frog-bg" src="/assets/seeker-splash.mp4" autoplay loop muted playsinline aria-hidden="true" @timeupdate="syncFrame"></video>
     <div class="bottom-fade"></div>
 
     <!-- Desktop card fans — decorative, behind hero content -->
@@ -103,7 +103,8 @@ import GibCard from './components/GibCard.vue'
 const currentFrame = ref(0)
 const stat1 = ref(null)
 const stat2 = ref(null)
-let frameInterval = null
+const videoRef = ref(null)
+const FRAME_COUNT = 4
 
 const leftCards = [
   { meme: 'BITCOIN', image: 'https://gib-meme-stats-page-production.up.railway.app/card-images/BITCOIN.png', power: 0.069, change: 0.05 },
@@ -117,19 +118,25 @@ const rightCards = [
   { meme: 'SOL', image: 'https://gib-meme-stats-page-production.up.railway.app/card-images/SOL.png', power: 0.057, change: 0.07 },
 ]
 
+function syncFrame() {
+  const video = videoRef.value
+  if (!video || !video.duration) return
+  const frameDuration = video.duration / FRAME_COUNT
+  const frame = Math.floor(video.currentTime / frameDuration) % FRAME_COUNT
+  currentFrame.value = frame
+}
+
 onMounted(() => {
-  // Frame cycling — 3.75 seconds per frame (15s total / 4 frames)
-  frameInterval = setInterval(() => {
-    currentFrame.value = (currentFrame.value + 1) % 4
-  }, 3750)
+  // Reset video to start on every page load/refresh
+  const video = videoRef.value
+  if (video) {
+    video.currentTime = 0
+    video.play()
+  }
 
   // Count-up animations
   animateStat(stat1.value, 100, '$', 'K', '')
   animateStat(stat2.value, 60, '', 'K', '+')
-})
-
-onUnmounted(() => {
-  if (frameInterval) clearInterval(frameInterval)
 })
 
 function animateStat(el, target, prefix, suffix, extra) {
