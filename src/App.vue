@@ -235,10 +235,10 @@ function animateStat(el, target, prefix, suffix, extra) {
   align-items: center;
   justify-content: center;
   background: #9b72f5;
-  padding: 5px 24px;
-  border-radius: 6px;
+  padding: 6px 29px;
+  border-radius: 7px;
   font-family: 'LuckiestGuy', sans-serif;
-  font-size: min(5vw, 3.5vh);
+  font-size: min(6vw, 4.2vh);
   line-height: 1;
   letter-spacing: 2px;
   color: #fff;
@@ -585,7 +585,7 @@ function animateStat(el, target, prefix, suffix, extra) {
   width: 100%;
   background: #2dd632;
   color: #000;
-  font-family: 'Luckiest Guy', cursive;
+  font-family: 'LuckiestGuy', sans-serif;
   font-weight: 400;
   font-size: 19px;
   letter-spacing: 0.5px;
