@@ -674,14 +674,19 @@ function animateStat(el, target, prefix, suffix, extra) {
     position: fixed;
     bottom: 0vh;
     z-index: 2;
-    pointer-events: none;
+    pointer-events: auto;
   }
-  .cards-fan-left { left: 2vw; }
-  .cards-fan-right { right: 2vw; }
+  .cards-fan-left { left: 6vw; }
+  .cards-fan-right { right: 6vw; }
 
   .fan-card {
     position: absolute;
     width: clamp(130px, 12vw, 200px);
+    transition: transform 0.25s ease, z-index 0s;
+    cursor: pointer;
+  }
+  .fan-card:hover {
+    z-index: 10 !important;
   }
 
   /* Left fan — all cards pivot from their bottom-left corner */
@@ -690,9 +695,12 @@ function animateStat(el, target, prefix, suffix, extra) {
     left: 0;
     transform-origin: 0% 100%;
   }
-  .fan-left-0 { transform: translateX(-2vw) rotate(-20deg); z-index: 1; }  /* BONK, shifted left */
-  .fan-left-1 { transform: rotate(8deg);   z-index: 2; }  /* BITCOIN kept */
-  .fan-left-2 { transform: rotate(46deg);  z-index: 3; }  /* WIF +10 */
+  .fan-left-0 { transform: translateX(-2vw) rotate(-20deg); z-index: 1; }
+  .fan-left-1 { transform: rotate(8deg);   z-index: 2; }
+  .fan-left-2 { transform: rotate(46deg);  z-index: 3; }
+  .fan-left-0:hover { transform: translateX(-2vw) rotate(-20deg) translateY(-30px); }
+  .fan-left-1:hover { transform: rotate(8deg) translateY(-30px); }
+  .fan-left-2:hover { transform: rotate(46deg) translateY(-30px); }
 
   /* Right fan — all cards pivot from their bottom-right corner */
   .cards-fan-right .fan-card {
@@ -700,9 +708,12 @@ function animateStat(el, target, prefix, suffix, extra) {
     right: 0;
     transform-origin: 100% 100%;
   }
-  .fan-right-0 { transform: rotate(-46deg); z-index: 3; }  /* FWOG -10 */
-  .fan-right-1 { transform: rotate(-8deg);  z-index: 2; }  /* TRUMP kept */
-  .fan-right-2 { transform: translateX(2vw) rotate(20deg);  z-index: 1; }  /* MOODENG, shifted right */
+  .fan-right-0 { transform: rotate(-46deg); z-index: 3; }
+  .fan-right-1 { transform: rotate(-8deg);  z-index: 2; }
+  .fan-right-2 { transform: translateX(2vw) rotate(20deg);  z-index: 1; }
+  .fan-right-0:hover { transform: rotate(-46deg) translateY(-30px); }
+  .fan-right-1:hover { transform: rotate(-8deg) translateY(-30px); }
+  .fan-right-2:hover { transform: translateX(2vw) rotate(20deg) translateY(-30px); }
 
   .hero-content { z-index: 3; }
 }
