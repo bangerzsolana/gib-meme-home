@@ -455,13 +455,13 @@ function animateStat(el, target, prefix, suffix, extra) {
 .arrow-down {
   justify-self: end;
   translate: 0 0;
-  transition: translate 0.7s cubic-bezier(0.25, 1, 0.5, 1) 0.25s;
+  transition: translate 0.7s cubic-bezier(0.16, 0.7, 0.3, 1) 0.25s;
   animation: arrow-bob-down 2.4s ease-in-out infinite;
 }
 .arrow-up {
   justify-self: start;
   translate: 0 0;
-  transition: translate 0.7s cubic-bezier(0.25, 1, 0.5, 1) 0.35s;
+  transition: translate 0.7s cubic-bezier(0.16, 0.7, 0.3, 1) 0.35s;
   animation: arrow-bob-up 2.4s ease-in-out infinite;
 }
 
