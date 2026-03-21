@@ -692,6 +692,12 @@ function animateStat(el, target, prefix, suffix, extra) {
     cursor: pointer;
     transition: translate 0.25s ease, z-index 0s;
   }
+  /* Invisible hover zone — larger than the card so hover stays stable on rotated cards */
+  .desktop-card::before {
+    content: '';
+    position: absolute;
+    inset: -60px -40px -20px -40px;
+  }
   .desktop-card:hover {
     translate: 0 -40px;
     z-index: 20 !important;
