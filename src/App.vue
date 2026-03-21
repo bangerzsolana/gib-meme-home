@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <video ref="videoRef" class="video-bg" src="/assets/seeker-splash.mp4" autoplay loop muted playsinline preload="metadata" aria-hidden="true" @timeupdate="syncFrame"></video>
+    <video ref="videoRef" class="video-bg" :src="videoSrc" autoplay loop muted playsinline preload="metadata" aria-hidden="true" @timeupdate="syncFrame"></video>
     <div class="bottom-fade"></div>
 
     <!-- Desktop card fans — decorative, behind hero content -->
@@ -97,7 +97,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import GibCard from './components/GibCard.vue'
 
 const currentFrame = ref(0)
@@ -105,6 +105,14 @@ const stat1 = ref(null)
 const stat2 = ref(null)
 const videoRef = ref(null)
 const FRAME_COUNT = 4
+const windowWidth = ref(window.innerWidth)
+
+const MOBILE_BREAKPOINT = 768
+const videoSrc = computed(() =>
+  windowWidth.value <= MOBILE_BREAKPOINT
+    ? '/assets/seeker-splash.mp4'
+    : '/assets/seeker-splash-desktop.mp4'
+)
 
 const leftCards = [
   { meme: 'BONK', image: '/assets/cards/BONK.png', power: 0.041, change: 0.12 },
@@ -126,7 +134,13 @@ function syncFrame() {
   currentFrame.value = frame
 }
 
+function onResize() {
+  windowWidth.value = window.innerWidth
+}
+
 onMounted(() => {
+  window.addEventListener('resize', onResize)
+
   // Reset video to start on every page load/refresh
   const video = videoRef.value
   if (video) {
@@ -154,6 +168,10 @@ onMounted(() => {
   // Count-up animations
   animateStat(stat1.value, 100, '$', 'K', '')
   animateStat(stat2.value, 60, '', 'K', '+')
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', onResize)
 })
 
 function animateStat(el, target, prefix, suffix, extra) {
