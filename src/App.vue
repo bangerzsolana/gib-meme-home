@@ -25,7 +25,6 @@
           :class="{ exiting: currentFrame !== 0 }"
         >
           <div class="title-main-wrap">
-            <div class="title-main-shadow" aria-hidden="true">MEMECOIN<br>TRADING CARD</div>
             <div class="title-main">MEMECOIN<br>TRADING CARD</div>
           </div>
           <div class="title-game-wrap">
@@ -211,52 +210,16 @@ function animateStat(el, target, prefix, suffix, extra) {
   padding: 4px 4px 2px;
 }
 
-.title-main-shadow {
-  position: absolute;
-  top: 4px; left: 4px; right: 4px;
-  font-family: 'LuckiestGuy', sans-serif;
-  font-size: min(10.5vw, 7vh);
-  /* KEEP line-height >= 1.1 — background-clip:text clipping bug with LuckiestGuy */
-  line-height: 1.15;
-  letter-spacing: 1px;
-  text-align: center;
-  color: #ffffff;
-  animation: shadow-bob 3s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes shadow-bob {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(5px); }
-  100% { transform: translateY(0); }
-}
 
 .title-main {
   position: relative;
   z-index: 1;
   font-family: 'LuckiestGuy', sans-serif;
-  /* KEEP line-height >= 1.1 — DO NOT lower this.
-     With -webkit-text-fill-color:transparent + background-clip:text,
-     the gradient only renders inside the line box. LuckiestGuy glyphs
-     extend above at low line-heights — top of MEMECOIN goes invisible. */
   font-size: min(10.5vw, 7vh);
   line-height: 1.15;
   letter-spacing: 1px;
   text-align: center;
-  background:
-    linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%) -200% 0 / 50% 100% no-repeat,
-    linear-gradient(160deg, #00F5FF 0%, #b29bf4 55%, #FE8CFA 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: title-shine 3.5s ease-in-out infinite;
-}
-
-@keyframes title-shine {
-  0%   { background-position: -200% 0, 0 0; }
-  50%  { background-position: 300% 0, 0 0; }
-  51%  { background-position: -200% 0, 0 0; opacity: 1; }
-  100% { background-position: -200% 0, 0 0; }
+  color: #ffffff;
 }
 
 /* ── "GAME" on rotated purple rectangle ── */
