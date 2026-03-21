@@ -152,8 +152,14 @@ function animateStat(el, target, prefix, suffix, extra) {
 .page {
   position: relative;
   width: 100%;
-  height: 100vh;
-  overflow-x: hidden;
+  height: 100dvh;        /* dynamic viewport — respects mobile address bar */
+  height: 100vh;         /* fallback for older browsers */
+  overflow: hidden;      /* no scrollbars, ever */
+  box-sizing: border-box;
+}
+
+@supports (height: 100dvh) {
+  .page { height: 100dvh; }
 }
 
 /* ── FROG / VIDEO BACKGROUND ── */
@@ -192,7 +198,7 @@ function animateStat(el, target, prefix, suffix, extra) {
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  padding: 0 16px 16px;
+  padding: 0 16px calc(16px + env(safe-area-inset-bottom, 0px));
   gap: 4px;
 }
 
@@ -666,5 +672,20 @@ function animateStat(el, target, prefix, suffix, extra) {
   .fan-right-2 { transform: rotate(35deg) translateX(30px);   z-index: 1; }
 
   .hero-content { z-index: 3; }
+}
+</style>
+
+<style>
+/* Global reset — prevents body margin from causing scrollbars */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background: #04161a;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 </style>
