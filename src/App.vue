@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <video ref="videoRef" class="frog-bg" src="/assets/seeker-splash.mp4" autoplay loop muted playsinline aria-hidden="true" @timeupdate="syncFrame"></video>
+    <video ref="videoRef" class="video-bg" src="/assets/seeker-splash.mp4" autoplay loop muted playsinline aria-hidden="true" @timeupdate="syncFrame"></video>
     <div class="bottom-fade"></div>
 
     <!-- Desktop card fans — decorative, behind hero content -->
@@ -170,7 +170,7 @@ function animateStat(el, target, prefix, suffix, extra) {
 }
 
 /* ── FROG / VIDEO BACKGROUND ── */
-.frog-bg {
+.video-bg {
   position: absolute;
   width: 100%;
   height: 100%;
