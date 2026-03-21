@@ -690,9 +690,9 @@ function animateStat(el, target, prefix, suffix, extra) {
     left: 0;
     transform-origin: 0% 100%;
   }
-  .fan-left-0 { transform: rotate(-28deg); z-index: 1; }
-  .fan-left-1 { transform: rotate(-14deg); z-index: 2; }
-  .fan-left-2 { transform: rotate(2deg);   z-index: 3; }
+  .fan-left-0 { transform: rotate(-20deg); z-index: 1; }
+  .fan-left-1 { transform: rotate(-2deg);  z-index: 2; }
+  .fan-left-2 { transform: rotate(16deg);  z-index: 3; }
 
   /* Right fan — all cards pivot from their bottom-right corner */
   .cards-fan-right .fan-card {
@@ -700,9 +700,9 @@ function animateStat(el, target, prefix, suffix, extra) {
     right: 0;
     transform-origin: 100% 100%;
   }
-  .fan-right-0 { transform: rotate(-2deg);  z-index: 3; }
-  .fan-right-1 { transform: rotate(14deg);  z-index: 2; }
-  .fan-right-2 { transform: rotate(28deg);  z-index: 1; }
+  .fan-right-0 { transform: rotate(-16deg); z-index: 3; }
+  .fan-right-1 { transform: rotate(2deg);   z-index: 2; }
+  .fan-right-2 { transform: rotate(20deg);  z-index: 1; }
 
   .hero-content { z-index: 3; }
 }
