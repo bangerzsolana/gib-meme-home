@@ -668,32 +668,41 @@ function animateStat(el, target, prefix, suffix, extra) {
   .stats-dot { margin: 0 0 18px; }
   .btn-play { width: 35%; margin-left: auto; margin-right: auto; margin-top: 20px; padding: 13px; }
 
-  /* Card fans — anchored to bottom corners of viewport */
+  /* Card fans — all cards share one anchor point per corner */
   .cards-fan {
     display: block;
     position: fixed;
-    bottom: 0;
+    bottom: -4vh;
     z-index: 2;
     pointer-events: none;
   }
-  .cards-fan-left { left: 0; }
-  .cards-fan-right { right: 0; }
+  .cards-fan-left { left: 4vw; }
+  .cards-fan-right { right: 4vw; }
 
   .fan-card {
     position: absolute;
-    width: clamp(140px, 13vw, 220px);
-    transform-origin: 50% 100%; /* rotate from bottom-center */
+    width: clamp(130px, 12vw, 200px);
   }
 
-  /* Left fan — origin at bottom-left corner, fan inward toward center */
-  .fan-left-0 { bottom: -18vh; left: -2vw;  transform: rotate(-20deg); z-index: 1; }
-  .fan-left-1 { bottom: -12vh; left: 2vw;   transform: rotate(-8deg);  z-index: 2; }
-  .fan-left-2 { bottom: -8vh;  left: 7vw;   transform: rotate(4deg);   z-index: 3; }
+  /* Left fan — all cards pivot from their bottom-left corner */
+  .cards-fan-left .fan-card {
+    bottom: 0;
+    left: 0;
+    transform-origin: 0% 100%;
+  }
+  .fan-left-0 { transform: rotate(-28deg); z-index: 1; }
+  .fan-left-1 { transform: rotate(-14deg); z-index: 2; }
+  .fan-left-2 { transform: rotate(2deg);   z-index: 3; }
 
-  /* Right fan — origin at bottom-right corner, fan inward toward center */
-  .fan-right-0 { bottom: -8vh;  right: 7vw;  transform: rotate(-4deg);  z-index: 3; }
-  .fan-right-1 { bottom: -12vh; right: 2vw;  transform: rotate(8deg);   z-index: 2; }
-  .fan-right-2 { bottom: -18vh; right: -2vw; transform: rotate(20deg);  z-index: 1; }
+  /* Right fan — all cards pivot from their bottom-right corner */
+  .cards-fan-right .fan-card {
+    bottom: 0;
+    right: 0;
+    transform-origin: 100% 100%;
+  }
+  .fan-right-0 { transform: rotate(-2deg);  z-index: 3; }
+  .fan-right-1 { transform: rotate(14deg);  z-index: 2; }
+  .fan-right-2 { transform: rotate(28deg);  z-index: 1; }
 
   .hero-content { z-index: 3; }
 }
