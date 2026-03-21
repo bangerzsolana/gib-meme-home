@@ -722,21 +722,17 @@ html, body {
 }
 /* Stat symbol styles — must be unscoped because animateStat() creates these via innerHTML */
 .stat-symbol {
-  font-size: 0.5em;
+  font-size: 0.65em;
   color: rgba(255,255,255,0.45);
   display: inline-block;
-  transform: rotate(-10deg);
   position: relative;
-  top: -0.15em;
   margin-right: 1px;
 }
 .stat-symbol-suffix {
-  font-size: 0.5em;
+  font-size: 0.65em;
   color: rgba(255,255,255,0.45);
   display: inline-block;
-  transform: rotate(10deg);
   position: relative;
-  top: -0.15em;
   margin-left: 1px;
 }
 </style>
