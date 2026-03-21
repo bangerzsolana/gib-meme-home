@@ -645,31 +645,31 @@ function animateStat(el, target, prefix, suffix, extra) {
 
   /* Card fans */
   .cards-fan {
-    display: block;
+    display: flex;
     position: absolute;
-    bottom: 8%;
+    bottom: -2%;
     z-index: 1;
     pointer-events: none;
   }
-  .cards-fan-left { left: -2%; }
-  .cards-fan-right { right: -2%; }
+  .cards-fan-left { left: -40px; }
+  .cards-fan-right { right: -40px; }
 
   .fan-card {
     position: absolute;
-    width: 160px;
+    width: clamp(140px, 12vw, 220px);
     transform-origin: bottom center;
     bottom: 0;
   }
 
-  /* Left fan — back to front */
-  .fan-left-0 { transform: rotate(-35deg) translateX(-30px); z-index: 1; }
-  .fan-left-1 { transform: rotate(-20deg) translateX(10px);  z-index: 2; }
-  .fan-left-2 { transform: rotate(-10deg) translateX(50px);  z-index: 3; }
+  /* Left fan — fanned from bottom-left, angled toward center */
+  .fan-left-0 { transform: rotate(-28deg) translateX(-60px); z-index: 1; }
+  .fan-left-1 { transform: rotate(-15deg) translateX(40px);  z-index: 2; }
+  .fan-left-2 { transform: rotate(-4deg) translateX(140px);  z-index: 3; }
 
-  /* Right fan — front to back */
-  .fan-right-0 { transform: rotate(10deg) translateX(-50px);  z-index: 3; }
-  .fan-right-1 { transform: rotate(20deg) translateX(-10px);  z-index: 2; }
-  .fan-right-2 { transform: rotate(35deg) translateX(30px);   z-index: 1; }
+  /* Right fan — fanned from bottom-right, angled toward center */
+  .fan-right-0 { transform: rotate(4deg) translateX(-140px);   z-index: 3; }
+  .fan-right-1 { transform: rotate(15deg) translateX(-40px);   z-index: 2; }
+  .fan-right-2 { transform: rotate(28deg) translateX(60px);    z-index: 1; }
 
   .hero-content { z-index: 3; }
 }
