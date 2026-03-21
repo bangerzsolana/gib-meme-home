@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <img class="frog-bg" src="/assets/gm-frogie.png" alt="" aria-hidden="true" />
+    <video class="frog-bg" src="/assets/seeker-splash.mp4" autoplay loop muted playsinline aria-hidden="true"></video>
     <div class="bottom-fade"></div>
 
     <!-- Desktop card fans — decorative, behind hero content -->
@@ -119,10 +119,10 @@ const rightCards = [
 ]
 
 onMounted(() => {
-  // Frame cycling — 5 seconds per frame
+  // Frame cycling — 3.75 seconds per frame (15s total / 4 frames)
   frameInterval = setInterval(() => {
     currentFrame.value = (currentFrame.value + 1) % 4
-  }, 5000)
+  }, 3750)
 
   // Count-up animations
   animateStat(stat1.value, 100, '$', 'K', '')
