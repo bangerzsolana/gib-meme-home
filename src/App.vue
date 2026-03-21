@@ -676,8 +676,8 @@ function animateStat(el, target, prefix, suffix, extra) {
     z-index: 2;
     pointer-events: none;
   }
-  .cards-fan-left { left: 4vw; }
-  .cards-fan-right { right: 4vw; }
+  .cards-fan-left { left: 2vw; }
+  .cards-fan-right { right: 2vw; }
 
   .fan-card {
     position: absolute;
