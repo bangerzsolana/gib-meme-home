@@ -107,15 +107,15 @@ const videoRef = ref(null)
 const FRAME_COUNT = 4
 
 const leftCards = [
-  { meme: 'BITCOIN', image: '/assets/cards/BITCOIN.png', power: 0.069, change: 0.05 },
   { meme: 'BONK', image: '/assets/cards/BONK.png', power: 0.041, change: 0.12 },
+  { meme: 'BITCOIN', image: '/assets/cards/BITCOIN.png', power: 0.069, change: 0.05 },
   { meme: 'WIF', image: '/assets/cards/WIF.jpg', power: 0.038, change: -0.08 },
 ]
 
 const rightCards = [
-  { meme: 'TRUMP', image: '/assets/cards/TRUMP.png', power: 0.095, change: 0.33 },
-  { meme: 'FARTCOIN', image: '/assets/cards/FARTCOIN.png', power: 0.022, change: 0.18 },
   { meme: 'FWOG', image: '/assets/cards/FWOG.jpg', power: 0.057, change: 0.07 },
+  { meme: 'TRUMP', image: '/assets/cards/TRUMP.png', power: 0.095, change: 0.33 },
+  { meme: 'MOODENG', image: '/assets/cards/MOODENG.png', power: 0.022, change: 0.18 },
 ]
 
 function syncFrame() {
@@ -663,20 +663,19 @@ function animateStat(el, target, prefix, suffix, extra) {
 
   .fan-card {
     position: absolute;
-    width: clamp(120px, 12vw, 200px);
-    transform-origin: bottom center;
-    bottom: -10%;
+    width: clamp(140px, 13vw, 220px);
+    transform-origin: 50% 100%; /* rotate from bottom-center */
   }
 
-  /* Left fan — anchored to bottom-left, cards angle inward (toward center) */
-  .fan-left-0 { left: -3vw;  transform: rotate(-18deg); z-index: 1; }
-  .fan-left-1 { left: 3vw;   transform: rotate(-6deg);  z-index: 2; }
-  .fan-left-2 { left: 9vw;   transform: rotate(6deg);   z-index: 3; }
+  /* Left fan — origin at bottom-left corner, fan inward toward center */
+  .fan-left-0 { bottom: -18vh; left: -2vw;  transform: rotate(-20deg); z-index: 1; }
+  .fan-left-1 { bottom: -12vh; left: 2vw;   transform: rotate(-8deg);  z-index: 2; }
+  .fan-left-2 { bottom: -8vh;  left: 7vw;   transform: rotate(4deg);   z-index: 3; }
 
-  /* Right fan — anchored to bottom-right, cards angle inward (toward center) */
-  .fan-right-0 { right: 9vw;  transform: rotate(-6deg);  z-index: 3; }
-  .fan-right-1 { right: 3vw;  transform: rotate(6deg);   z-index: 2; }
-  .fan-right-2 { right: -3vw; transform: rotate(18deg);  z-index: 1; }
+  /* Right fan — origin at bottom-right corner, fan inward toward center */
+  .fan-right-0 { bottom: -8vh;  right: 7vw;  transform: rotate(-4deg);  z-index: 3; }
+  .fan-right-1 { bottom: -12vh; right: 2vw;  transform: rotate(8deg);   z-index: 2; }
+  .fan-right-2 { bottom: -18vh; right: -2vw; transform: rotate(20deg);  z-index: 1; }
 
   .hero-content { z-index: 3; }
 }
