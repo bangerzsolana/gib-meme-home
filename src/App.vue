@@ -690,10 +690,10 @@ function animateStat(el, target, prefix, suffix, extra) {
     width: clamp(130px, 12vw, 200px);
     z-index: 5;
     cursor: pointer;
-    transition: transform 0.25s ease;
+    transition: translate 0.25s ease, z-index 0s;
   }
   .desktop-card:hover {
-    transform: translateY(-40px) !important;
+    translate: 0 -40px;
     z-index: 20 !important;
   }
 
