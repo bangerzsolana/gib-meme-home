@@ -114,7 +114,7 @@ const leftCards = [
 
 const rightCards = [
   { meme: 'FWOG', image: '/assets/cards/FWOG.jpg', power: 0.057, change: 0.07 },
-  { meme: 'TRUMP', image: '/assets/cards/TRUMP.png', power: 0.095, change: 0.33 },
+  { meme: 'FARTCOIN', image: '/assets/cards/FARTCOIN.png', power: 0.095, change: 0.33 },
   { meme: 'MOODENG', image: '/assets/cards/MOODENG.png', power: 0.022, change: 0.18 },
 ]
 
