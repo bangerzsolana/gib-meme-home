@@ -107,15 +107,15 @@ const videoRef = ref(null)
 const FRAME_COUNT = 4
 
 const leftCards = [
-  { meme: 'BITCOIN', image: 'https://gib-meme-stats-page-production.up.railway.app/card-images/BITCOIN.png', power: 0.069, change: 0.05 },
-  { meme: 'BONK', image: 'https://gib-meme-stats-page-production.up.railway.app/card-images/BONK.png', power: 0.041, change: 0.12 },
-  { meme: 'WIF', image: 'https://gib-meme-stats-page-production.up.railway.app/card-images/WIF.png', power: 0.038, change: -0.08 },
+  { meme: 'BITCOIN', image: '/assets/cards/BITCOIN.png', power: 0.069, change: 0.05 },
+  { meme: 'BONK', image: '/assets/cards/BONK.png', power: 0.041, change: 0.12 },
+  { meme: 'WIF', image: '/assets/cards/WIF.jpg', power: 0.038, change: -0.08 },
 ]
 
 const rightCards = [
-  { meme: 'TRUMP', image: 'https://gib-meme-stats-page-production.up.railway.app/card-images/TRUMP.png', power: 0.095, change: 0.33 },
-  { meme: 'FARTCOIN', image: 'https://gib-meme-stats-page-production.up.railway.app/card-images/FARTCOIN.png', power: 0.022, change: 0.18 },
-  { meme: 'SOL', image: 'https://gib-meme-stats-page-production.up.railway.app/card-images/SOL.png', power: 0.057, change: 0.07 },
+  { meme: 'TRUMP', image: '/assets/cards/TRUMP.png', power: 0.095, change: 0.33 },
+  { meme: 'FARTCOIN', image: '/assets/cards/FARTCOIN.png', power: 0.022, change: 0.18 },
+  { meme: 'FWOG', image: '/assets/cards/FWOG.jpg', power: 0.057, change: 0.07 },
 ]
 
 function syncFrame() {
@@ -650,33 +650,33 @@ function animateStat(el, target, prefix, suffix, extra) {
   .stats-dot { margin: 0 0 18px; }
   .btn-play { width: 35%; margin-left: auto; margin-right: auto; margin-top: 20px; padding: 13px; }
 
-  /* Card fans */
+  /* Card fans — anchored to bottom corners of viewport */
   .cards-fan {
-    display: flex;
-    position: absolute;
-    bottom: -8%;
+    display: block;
+    position: fixed;
+    bottom: 0;
     z-index: 2;
     pointer-events: none;
   }
-  .cards-fan-left { left: -20px; }
-  .cards-fan-right { right: -20px; }
+  .cards-fan-left { left: 0; }
+  .cards-fan-right { right: 0; }
 
   .fan-card {
     position: absolute;
-    width: clamp(160px, 14vw, 240px);
+    width: clamp(120px, 12vw, 200px);
     transform-origin: bottom center;
-    bottom: 0;
+    bottom: -10%;
   }
 
-  /* Left fan — fanned from bottom-left, angled toward center */
-  .fan-left-0 { transform: rotate(-25deg) translateX(-30px); z-index: 1; }
-  .fan-left-1 { transform: rotate(-12deg) translateX(80px);  z-index: 2; }
-  .fan-left-2 { transform: rotate(2deg) translateX(190px);   z-index: 3; }
+  /* Left fan — anchored to bottom-left, cards angle inward (toward center) */
+  .fan-left-0 { left: -3vw;  transform: rotate(-18deg); z-index: 1; }
+  .fan-left-1 { left: 3vw;   transform: rotate(-6deg);  z-index: 2; }
+  .fan-left-2 { left: 9vw;   transform: rotate(6deg);   z-index: 3; }
 
-  /* Right fan — fanned from bottom-right, angled toward center */
-  .fan-right-0 { transform: rotate(-2deg) translateX(-190px);  z-index: 3; }
-  .fan-right-1 { transform: rotate(12deg) translateX(-80px);   z-index: 2; }
-  .fan-right-2 { transform: rotate(25deg) translateX(30px);    z-index: 1; }
+  /* Right fan — anchored to bottom-right, cards angle inward (toward center) */
+  .fan-right-0 { right: 9vw;  transform: rotate(-6deg);  z-index: 3; }
+  .fan-right-1 { right: 3vw;  transform: rotate(6deg);   z-index: 2; }
+  .fan-right-2 { right: -3vw; transform: rotate(18deg);  z-index: 1; }
 
   .hero-content { z-index: 3; }
 }
