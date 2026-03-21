@@ -585,8 +585,8 @@ function animateStat(el, target, prefix, suffix, extra) {
   width: 100%;
   background: #2dd632;
   color: #000;
-  font-family: 'Inter', sans-serif;
-  font-weight: 800;
+  font-family: 'Luckiest Guy', cursive;
+  font-weight: 400;
   font-size: 19px;
   letter-spacing: 0.5px;
   text-align: center;
