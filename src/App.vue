@@ -681,11 +681,12 @@ function animateStat(el, target, prefix, suffix, extra) {
   .fan-card {
     position: absolute;
     width: clamp(130px, 12vw, 200px);
-    transition: transform 0.25s ease, z-index 0s;
+    transition: transform 0.25s ease, bottom 0.25s ease, z-index 0s;
     cursor: pointer;
   }
   .fan-card:hover {
     z-index: 10 !important;
+    bottom: 40px !important;
   }
 
   /* Left fan — all cards pivot from their bottom-left corner */
@@ -697,9 +698,6 @@ function animateStat(el, target, prefix, suffix, extra) {
   .fan-left-0 { transform: translateX(-2vw) rotate(-20deg); z-index: 1; }
   .fan-left-1 { transform: rotate(8deg);   z-index: 2; }
   .fan-left-2 { transform: rotate(46deg);  z-index: 3; }
-  .fan-left-0:hover { transform: translateX(-2vw) rotate(-20deg) translateY(-30px); }
-  .fan-left-1:hover { transform: rotate(8deg) translateY(-30px); }
-  .fan-left-2:hover { transform: rotate(46deg) translateY(-30px); }
 
   /* Right fan — all cards pivot from their bottom-right corner */
   .cards-fan-right .fan-card {
@@ -710,9 +708,6 @@ function animateStat(el, target, prefix, suffix, extra) {
   .fan-right-0 { transform: rotate(-46deg); z-index: 3; }
   .fan-right-1 { transform: rotate(-8deg);  z-index: 2; }
   .fan-right-2 { transform: translateX(2vw) rotate(20deg);  z-index: 1; }
-  .fan-right-0:hover { transform: rotate(-46deg) translateY(-30px); }
-  .fan-right-1:hover { transform: rotate(-8deg) translateY(-30px); }
-  .fan-right-2:hover { transform: translateX(2vw) rotate(20deg) translateY(-30px); }
 
   .hero-content { z-index: 3; }
 }
