@@ -672,7 +672,7 @@ function animateStat(el, target, prefix, suffix, extra) {
   .cards-fan {
     display: block;
     position: fixed;
-    bottom: -4vh;
+    bottom: 0vh;
     z-index: 2;
     pointer-events: none;
   }
@@ -690,7 +690,7 @@ function animateStat(el, target, prefix, suffix, extra) {
     left: 0;
     transform-origin: 0% 100%;
   }
-  .fan-left-0 { transform: translateX(-2vw) rotate(-25deg); z-index: 1; }  /* BONK +5, shifted left */
+  .fan-left-0 { transform: translateX(-2vw) rotate(-20deg); z-index: 1; }  /* BONK, shifted left */
   .fan-left-1 { transform: rotate(8deg);   z-index: 2; }  /* BITCOIN kept */
   .fan-left-2 { transform: rotate(46deg);  z-index: 3; }  /* WIF +10 */
 
@@ -702,7 +702,7 @@ function animateStat(el, target, prefix, suffix, extra) {
   }
   .fan-right-0 { transform: rotate(-46deg); z-index: 3; }  /* FWOG -10 */
   .fan-right-1 { transform: rotate(-8deg);  z-index: 2; }  /* TRUMP kept */
-  .fan-right-2 { transform: translateX(2vw) rotate(25deg);  z-index: 1; }  /* MOODENG -5, shifted right */
+  .fan-right-2 { transform: translateX(2vw) rotate(20deg);  z-index: 1; }  /* MOODENG, shifted right */
 
   .hero-content { z-index: 3; }
 }
