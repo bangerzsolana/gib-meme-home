@@ -3,16 +3,12 @@
     <video ref="videoRef" class="video-bg" :src="videoSrc" autoplay loop muted playsinline preload="metadata" aria-hidden="true" @timeupdate="syncFrame"></video>
     <div class="bottom-fade"></div>
 
-    <!-- Desktop card fans — decorative, behind hero content -->
-    <div class="cards-fan cards-fan-left">
-      <div v-for="(card, i) in leftCards" :key="card.meme" class="fan-card" :class="'fan-left-' + i">
-        <GibCard :meme="card.meme" :image="card.image" :power="card.power" :change="card.change" />
-      </div>
+    <!-- Desktop card fans — each card is independently fixed-positioned -->
+    <div v-for="(card, i) in leftCards" :key="'L'+card.meme" class="desktop-card card-left" :class="'card-left-' + i">
+      <GibCard :meme="card.meme" :image="card.image" :power="card.power" :change="card.change" />
     </div>
-    <div class="cards-fan cards-fan-right">
-      <div v-for="(card, i) in rightCards" :key="card.meme" class="fan-card" :class="'fan-right-' + i">
-        <GibCard :meme="card.meme" :image="card.image" :power="card.power" :change="card.change" />
-      </div>
+    <div v-for="(card, i) in rightCards" :key="'R'+card.meme" class="desktop-card card-right" :class="'card-right-' + i">
+      <GibCard :meme="card.meme" :image="card.image" :power="card.power" :change="card.change" />
     </div>
 
     <div class="hero-content">
@@ -673,7 +669,8 @@ function animateStat(el, target, prefix, suffix, extra) {
 }
 
 /* ── CARD FANS — hidden on mobile ── */
-.cards-fan {
+/* Desktop cards — hidden on mobile */
+.desktop-card {
   display: none;
 }
 
@@ -685,49 +682,40 @@ function animateStat(el, target, prefix, suffix, extra) {
   .stats-dot { margin: 0 0 18px; }
   .btn-play { width: 35%; margin-left: auto; margin-right: auto; margin-top: 20px; padding: 13px; }
 
-  /* Card fans — all cards share one anchor point per corner */
-  .cards-fan {
+  /* Each card is independently fixed to the viewport */
+  .desktop-card {
     display: block;
     position: fixed;
-    bottom: 0vh;
-    z-index: 2;
-    pointer-events: auto;
-  }
-  .cards-fan-left { left: 6vw; }
-  .cards-fan-right { right: 6vw; }
-
-  .fan-card {
-    position: absolute;
-    width: clamp(130px, 12vw, 200px);
-    transition: transform 0.25s ease, bottom 0.25s ease, z-index 0s;
-    cursor: pointer;
-  }
-  .fan-card:hover {
-    z-index: 10 !important;
-    bottom: 40px !important;
-  }
-
-  /* Left fan — all cards pivot from their bottom-left corner */
-  .cards-fan-left .fan-card {
     bottom: 0;
-    left: 0;
+    width: clamp(130px, 12vw, 200px);
+    z-index: 5;
+    cursor: pointer;
+    transition: transform 0.25s ease;
+  }
+  .desktop-card:hover {
+    transform: translateY(-40px) !important;
+    z-index: 20 !important;
+  }
+
+  /* Left fan — anchored to bottom-left area */
+  .card-left {
     transform-origin: 0% 100%;
   }
-  .fan-left-0 { transform: translateX(-2vw) rotate(-20deg); z-index: 1; }
-  .fan-left-1 { transform: rotate(8deg);   z-index: 2; }
-  .fan-left-2 { transform: rotate(46deg);  z-index: 3; }
+  .card-left-0 { left: 6vw; transform: translateX(-2vw) rotate(-20deg); z-index: 5; }
+  .card-left-1 { left: 6vw; transform: rotate(8deg);   z-index: 6; }
+  .card-left-2 { left: 6vw; transform: rotate(46deg);  z-index: 7; }
 
-  /* Right fan — all cards pivot from their bottom-right corner */
-  .cards-fan-right .fan-card {
-    bottom: 0;
-    right: 0;
+  /* Right fan — anchored to bottom-right area */
+  .card-right {
     transform-origin: 100% 100%;
   }
-  .fan-right-0 { transform: rotate(-46deg); z-index: 3; }
-  .fan-right-1 { transform: rotate(-8deg);  z-index: 2; }
-  .fan-right-2 { transform: translateX(2vw) rotate(20deg);  z-index: 1; }
+  .card-right-0 { right: 6vw; transform: rotate(-46deg); z-index: 7; }
+  .card-right-1 { right: 6vw; transform: rotate(-8deg);  z-index: 6; }
+  .card-right-2 { right: 6vw; transform: translateX(2vw) rotate(20deg);  z-index: 5; }
 
-  .hero-content { z-index: 3; }
+  .hero-content { z-index: 3; pointer-events: none; }
+  .hero-content .btn-play,
+  .hero-content a { pointer-events: auto; }
 }
 </style>
 
