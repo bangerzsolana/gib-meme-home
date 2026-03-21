@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <video ref="videoRef" class="video-bg" src="/assets/seeker-splash.mp4" autoplay loop muted playsinline preload="auto" aria-hidden="true" @timeupdate="syncFrame"></video>
+    <video ref="videoRef" class="video-bg" src="/assets/seeker-splash.mp4" autoplay loop muted playsinline preload="metadata" aria-hidden="true" @timeupdate="syncFrame"></video>
     <div class="bottom-fade"></div>
 
     <!-- Desktop card fans — decorative, behind hero content -->
@@ -131,8 +131,7 @@ onMounted(() => {
   const video = videoRef.value
   if (video) {
     video.currentTime = 0
-    // Force load + play — handles mobile browsers that block autoplay
-    video.load()
+    // Play — handles mobile browsers that block autoplay
     const tryPlay = () => {
       video.play().catch(() => {
         // Some mobile browsers need a user gesture — retry on first touch
