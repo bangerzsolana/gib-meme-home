@@ -658,10 +658,7 @@ function animateStat(el, target, prefix, suffix, extra) {
 
 /* ── DESKTOP OVERRIDES ── */
 @media (min-width: 768px) {
-  .stat-num { font-size: min(2.5vw, 4.5vh); }
-  .stats-row { justify-content: center; gap: 32px; }
-  .stat { flex: 0 0 auto; }
-  .stats-dot { margin: 0 0 18px; }
+  .stats-row { display: none; }
   .btn-play { width: 35%; margin-left: auto; margin-right: auto; margin-top: 20px; padding: 13px; }
 
   /* Each card is independently fixed to the viewport */
