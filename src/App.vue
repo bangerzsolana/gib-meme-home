@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <video ref="videoRef" class="video-bg" :src="videoSrc" autoplay loop muted playsinline preload="metadata" aria-hidden="true" @timeupdate="syncFrame"></video>
+    <video ref="videoRef" class="video-bg" autoplay loop muted playsinline preload="auto" aria-hidden="true" @timeupdate="syncFrame"></video>
     <div class="bottom-fade"></div>
 
     <!-- Desktop card fans — each card is independently fixed-positioned -->
@@ -566,11 +566,12 @@ function animateStat(el, target, prefix, suffix, extra) {
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-top: 4px;
+  max-width: 320px;
+  margin: 4px auto 0;
 }
 
 .stat {
-  flex: 1;
+  flex: 0 1 auto;
   text-align: center;
 }
 
