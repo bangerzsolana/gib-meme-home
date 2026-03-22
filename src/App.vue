@@ -93,7 +93,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import GibCard from './components/GibCard.vue'
 
 const currentFrame = ref(0)
@@ -104,11 +104,6 @@ const FRAME_COUNT = 4
 const windowWidth = ref(window.innerWidth)
 
 const MOBILE_BREAKPOINT = 768
-const videoSrc = computed(() =>
-  windowWidth.value <= MOBILE_BREAKPOINT
-    ? '/assets/seeker-splash.mp4'
-    : '/assets/seeker-splash-desktop.mp4'
-)
 
 const leftCards = [
   { meme: 'BONK', image: '/assets/cards/BONK.png', power: 0.041, change: 0.12 },
@@ -132,32 +127,65 @@ function syncFrame() {
 
 function onResize() {
   windowWidth.value = window.innerWidth
+  setVideoSource()
+}
+
+function setVideoSource() {
+  const video = videoRef.value
+  if (!video) return
+  const src = windowWidth.value <= MOBILE_BREAKPOINT
+    ? '/assets/seeker-splash.mp4'
+    : '/assets/seeker-splash-desktop.mp4'
+  if (video.getAttribute('src') !== src) {
+    video.src = src
+  }
+}
+
+function forcePlay() {
+  const video = videoRef.value
+  if (!video) return
+  // Explicitly set muted via JS — critical for mobile autoplay.
+  // Mobile Safari/Chrome check the HTML attribute to decide autoplay
+  // permission. Vue's boolean "muted" attribute may not set the raw
+  // HTML attribute, causing the browser to treat the video as unmuted.
+  video.muted = true
+  video.setAttribute('muted', '')
+  video.playsInline = true
+  video.play().catch(() => {
+    // Autoplay blocked — wait for first user gesture
+    const onGesture = () => {
+      video.muted = true
+      video.play()
+      document.removeEventListener('touchstart', onGesture)
+      document.removeEventListener('click', onGesture)
+    }
+    document.addEventListener('touchstart', onGesture, { once: true })
+    document.addEventListener('click', onGesture, { once: true })
+  })
 }
 
 onMounted(() => {
   window.addEventListener('resize', onResize)
 
-  // Reset video to start on every page load/refresh
   const video = videoRef.value
   if (video) {
+    // Set muted attribute AND property before anything else.
+    // Mobile browsers decide autoplay permission at element creation
+    // based on the HTML attribute, not the JS property alone.
+    video.muted = true
+    video.setAttribute('muted', '')
+    video.playsInline = true
+    video.setAttribute('playsinline', '')
     video.currentTime = 0
-    // Play — handles mobile browsers that block autoplay
-    const tryPlay = () => {
-      video.play().catch(() => {
-        // Some mobile browsers need a user gesture — retry on first touch
-        const onTouch = () => {
-          video.play()
-          document.removeEventListener('touchstart', onTouch)
-          document.removeEventListener('click', onTouch)
-        }
-        document.addEventListener('touchstart', onTouch, { once: true })
-        document.addEventListener('click', onTouch, { once: true })
-      })
-    }
-    // Always try to play immediately — the browser will buffer as needed.
-    // Don't gate on readyState/loadeddata because with preload="metadata"
-    // mobile browsers may never reach readyState >= 2 until play() is called.
-    tryPlay()
+
+    // Set the correct video source imperatively (not via Vue :src binding)
+    // so the browser sees the src in the DOM immediately
+    setVideoSource()
+
+    // Try play on canplay (enough data buffered to start)
+    video.addEventListener('canplay', forcePlay, { once: true })
+    // Also try immediately in case already ready
+    forcePlay()
   }
 
   // Count-up animations
