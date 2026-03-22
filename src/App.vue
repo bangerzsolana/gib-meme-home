@@ -154,11 +154,10 @@ onMounted(() => {
         document.addEventListener('click', onTouch, { once: true })
       })
     }
-    if (video.readyState >= 2) {
-      tryPlay()
-    } else {
-      video.addEventListener('loadeddata', tryPlay, { once: true })
-    }
+    // Always try to play immediately — the browser will buffer as needed.
+    // Don't gate on readyState/loadeddata because with preload="metadata"
+    // mobile browsers may never reach readyState >= 2 until play() is called.
+    tryPlay()
   }
 
   // Count-up animations
