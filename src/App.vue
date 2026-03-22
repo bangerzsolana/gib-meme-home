@@ -696,6 +696,26 @@ function animateStat(el, target, prefix, suffix, extra) {
   .card-right-1 { right: 6vw; transform: rotate(-8deg);  z-index: 6; }
   .card-right-2 { right: 6vw; transform: translateX(2vw) rotate(20deg);  z-index: 5; }
 
+  /* Bobbing animation — side cards (0, 2) and middle cards (1) alternate */
+  @keyframes card-bob {
+    0%, 100% { translate: 0 0; }
+    50% { translate: 0 -8px; }
+  }
+  @keyframes card-bob-alt {
+    0%, 100% { translate: 0 -8px; }
+    50% { translate: 0 0; }
+  }
+  .card-left-0, .card-left-2, .card-right-0, .card-right-2 {
+    animation: card-bob 3s ease-in-out infinite;
+  }
+  .card-left-1, .card-right-1 {
+    animation: card-bob-alt 3s ease-in-out infinite;
+  }
+  /* Pause bobbing on hover so the jump-up isn't fighting the animation */
+  .desktop-card:hover {
+    animation-play-state: paused;
+  }
+
   .hero-content { z-index: 3; pointer-events: none; }
   .hero-content .btn-play,
   .hero-content a { pointer-events: auto; }
