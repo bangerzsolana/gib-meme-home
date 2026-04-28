@@ -1,5 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import Trailer from './Trailer.vue'
 import './style.css'
 
-createApp(App).mount('#app')
+const isTrailer = window.location.search.includes('trailer') ||
+                  window.location.pathname === '/trailer'
+
+createApp(isTrailer ? Trailer : App).mount('#app')
