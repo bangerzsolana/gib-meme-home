@@ -1,5 +1,8 @@
 <template>
   <div class="page">
+    <div class="logo-bar">
+      <img class="logo" src="/assets/gibmeme_color.svg" alt="Gib Meme" />
+    </div>
     <video ref="videoRef" class="video-bg" :src="videoSrc" autoplay loop muted playsinline webkit-playsinline preload="auto" aria-hidden="true" @timeupdate="syncFrame"></video>
     <div class="bottom-fade"></div>
 
@@ -219,6 +222,24 @@ function animateStat(el, target, prefix, suffix, extra) {
 
 @supports (height: 100dvh) {
   .page { height: 100dvh; }
+}
+
+/* ── LOGO ── */
+.logo-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+  padding-top: calc(16px + env(safe-area-inset-top, 0px));
+}
+
+.logo {
+  height: 32px;
+  width: auto;
 }
 
 /* ── FROG / VIDEO BACKGROUND ── */
@@ -680,6 +701,8 @@ function animateStat(el, target, prefix, suffix, extra) {
 
 /* ── DESKTOP OVERRIDES ── */
 @media (min-width: 768px) {
+  .logo-bar { justify-content: flex-start; padding: 20px 32px; }
+  .logo { height: 38px; }
   .btn-play { width: 35%; margin-left: auto; margin-right: auto; margin-top: 20px; padding: 13px; }
 
   /* Each card is independently fixed to the viewport */
